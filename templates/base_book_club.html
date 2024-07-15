@@ -91,12 +91,12 @@
   {% set name = "Helen" %}
   <div class="main">
     <header>
-      <a href="{{ url_for('book_club') }}"><img class="center logo-button"
+      <a href="/"><img class="center logo-button"
           src="{{ url_for('static', filename='images/site_images/BBandBC-2.png') }}"></img></a>
       <div>
         <a href="{{ url_for('book_club_about') }}"><img class="nav-button"
             src="{{ url_for('static', filename='images/site_images/about.png') }}"></a>
-        <a class="foo right action" href="{{ url_for('book_club_wrapped', name=name) }}">
+        <a class="foo right action" href="{{ url_for('wrapped_helen') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-shut.png') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-open.png') }}">
         </a>

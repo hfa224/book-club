@@ -8,18 +8,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template('home.html')
-    
-@app.route('/slideshow')
-def slideshow():
-    return render_template('slideshow.html')
-    
-@app.route('/newsletter')
-def newsletter():
-    return render_template('newsletter.html')
-
-@app.route('/book_club')
-def book_club():
     read_book_data()
     book_array = read_book_isbns()
 
@@ -31,7 +19,19 @@ def book_club():
 def book_club_about():
     return render_template('book_club_about.html')
 
-@app.route('/<string:name>/book_club_wrapped')
+# This is a noddy way of making the site able to be made static
+@app.route('/book_club_wrapped/max')
+def wrapped_max():
+    return book_club_wrapped("Max")
+
+@app.route('/book_club_wrapped/beth')
+def wrapped_beth():
+    return book_club_wrapped("Beth")
+
+@app.route('/book_club_wrapped/helen')
+def wrapped_helen():
+    return book_club_wrapped("Helen")
+
 def book_club_wrapped(name):
     book_array = read_book_isbns()
     
