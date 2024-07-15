@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}{% endblock %} - Berlin Beer and Book club</title>
+  <link rel="stylesheet" href="https://unpkg.com/bamboo.css" type="text/css">
+  <style>
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+
+    .center-book {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+      margin-right: auto;
+      width: 30%;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .nav-button {
+      width: 100px;
+      height: auto;
+    }
+
+    .suprise-button {
+      width: 50px;
+      height: auto;
+    }
+
+    .logo-button {
+      width: 300px;
+      height: auto;
+    }
+
+    .img11 {
+      transform: rotate(0deg);
+      box-shadow: 0.5em 0.5em 0.5em #ccc;
+    }
+
+    .img11:hover {
+      transform: rotate(-12deg);
+      box-shadow: 0.5em 0.5em 0.5em #ccc;
+    }
+
+    .credit-link {
+      transform: rotate(-12deg);
+      box-shadow: 0.5em 0.5em 0.5em #ccc;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      font-size: .75rem;
+    }
+
+    .foo img:last-child {
+      display: none
+    }
+
+    .foo:hover img:first-child {
+      display: none
+    }
+
+    .foo:hover img:last-child {
+      display: inline-block
+    }
+
+    .bgimg {
+      background-image: url('static/images/background_star.png');
+      background-size: 300px;
+      background-repeat:no-repeat;
+      height: 300px;
+      background-position: center center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Page content -->
+  {% set name = "Helen" %}
+  <div class="main">
+    <header>
+      <a href="{{ url_for('book_club') }}"><img class="center logo-button"
+          src="{{ url_for('static', filename='images/site_images/BBandBC-2.png') }}"></img></a>
+      <div>
+        <a href="{{ url_for('book_club_about') }}"><img class="nav-button"
+            src="{{ url_for('static', filename='images/site_images/about.png') }}"></a>
+        <a class="foo right action" href="{{ url_for('book_club_wrapped', name=name) }}">
+          <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-shut.png') }}">
+          <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-open.png') }}">
+        </a>
+      </div>
+      {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </div>
+  <div class="footer">
+    <a href="https://www.flaticon.com/free-icons/gift" title="gift icons">Gift icons created by amonrat rungreangfangsai
+      - Flaticon</a><br>
+    <a href="https://codepen.io/hexagoncircle/pen/wvOPmGO" title="gift icons">CSS for wrapped page by hexagoncircle</a>
+  </div>
+</body>
+
+</html>
