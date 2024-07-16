@@ -5,6 +5,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+app.config['FREEZER_RELATIVE_URLS']= True
+
 
 @app.route("/")
 def home():
@@ -15,20 +17,20 @@ def home():
     book_array.remove(current_book)
     return render_template('book_club.html', book_array=book_array, current_book=current_book)
 
-@app.route('/book_club_about')
+@app.route('/book_club_about/')
 def book_club_about():
     return render_template('book_club_about.html')
 
 # This is a noddy way of making the site able to be made static
-@app.route('/book_club_wrapped/max')
+@app.route('/book_club_wrapped/max/')
 def wrapped_max():
     return book_club_wrapped("Max")
 
-@app.route('/book_club_wrapped/beth')
+@app.route('/book_club_wrapped/beth/')
 def wrapped_beth():
     return book_club_wrapped("Beth")
 
-@app.route('/book_club_wrapped/helen')
+@app.route('/book_club_wrapped/helen/')
 def wrapped_helen():
     return book_club_wrapped("Helen")
 
@@ -41,7 +43,7 @@ def book_club_wrapped(name):
     return render_template('book_club_wrapped.html', book_array=book_array, picked_books=picked_books, name=name, 
                            highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book)
 
-@app.route('/<string:name>/book_club_stats')
+@app.route('/<string:name>/book_club_stats/')
 def book_club_stats(name):
     book_array = read_book_isbns()
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
