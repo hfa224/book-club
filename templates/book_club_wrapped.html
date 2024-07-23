@@ -17,6 +17,12 @@
   <p class="text">We've read {{ book_array|length }} books so far!</p>
 </div>
 <div class="box">
+  <p class="text">In {{ genres|length }} genres...</p>
+</div>
+<div class="box">
+  <p class="text">{{ genres }}</p>
+</div>
+<div class="box">
   <p class="text">Your highest rated book is {{highest_rated_book['title']}}</p>
   {% set cover_img_url =  highest_rated_book['cover_image_url'] %}
   {% if 'http' in highest_rated_book['cover_image_url'] %}

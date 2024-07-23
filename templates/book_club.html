@@ -5,40 +5,60 @@
 {% endblock %}
 
 {% block content %}
-<h3>The current book is:</h3>
-<h3>{{ current_book['title'] }} by  {{ current_book['author'] }} picked by  {{ current_book['picker'] }} in  {{ current_book['date'] }}</h3>
+<img class="center" style="width:200; height:auto;" src={{ url_for('static', filename="images/site_images/current_book.png") }}></img>
 <div class="bgimg">
+<!--h3>{{ current_book['title'] }} by  {{ current_book['author'] }} picked by  {{ current_book['picker'] }} in  {{ current_book['date'] }}</h3-->
+<div class="image-aside">
+	<p><b>Title: </b>{{ current_book['title'] }} </p>
+	<p><b>Author: </b>{{ current_book['author'] }}</p>
+	<p><b>Genre: </b>{{ current_book['genre'] }}</p>
+	<p><b>Chosen by: </b>{{ current_book['picker'] }} on {{ current_book['date'] }}</p>
+	</div>
 	{% if 'http' in current_book['cover_image_url'] %}
-	<img class="center-book" src={{ current_book['cover_image_url'] }}>
+	<img class="aside-image" src={{ current_book['cover_image_url'] }}>
   {% else %}
-	<img src={{ url_for('static', filename=current_book['cover_image_url']) }}></img>
+	<img class="aside-image" src={{ url_for('static', filename=current_book['cover_image_url']) }}></img>
   {% endif %}
 </div>
+<h3>Previous books...</h3>
 {% for book in book_array %}
-	<div class="post">
+	<p>
 		{% set index =  book['rating']['Average'] | int() %}
-		<h3>{{ book['title'] }} by  {{ book['author'] }} picked by  {{ book['picker'] }} in  {{ book['date'] }}</h3>
-			{% if 'http' in book['cover_image_url'] %}
-			<img class="tag" src={{ book['cover_image_url'] }}>
-		  {% else %}
-			<img src={{ url_for('static', filename=book['cover_image_url']) }}></img>
-		  {% endif %}
-		{% if index > 0 %}
-		<p>The average rating was
-			{% set vars = {'rating': book['rating']['Average'] | float() } %}
-			{% for i in range(index+1) %}
-				{% if (vars.rating >= 1) %}
-					<img src={{ url_for('static', filename='images/site_images/full_star.png') }}></img>
-				{% elif (vars.rating == 0) %}	
-					<img></img>
-				{% else %}	
-					<img src={{ url_for('static', filename='images/site_images/half_star.png') }}></img>
-				{% endif %}
-				{% if vars.update({'rating': vars.rating - 1}) %}{% endif %}
-			{% endfor %}
-			/5
-		</p>
+		<div class="image-aside">
+			<p><b>Title: </b>{{ book['title'] }} </p>
+			<p><b>Author: </b>{{ book['author'] }}</p>
+			<p><b>Genre: </b>{{ book['genre'] }}</p>
+			<p><b>Chosen by: </b>{{ book['picker'] }} on {{ book['date'] }}</p>
+			{% if index > 0 %}
+				<p>The average rating was
+					{% set vars = {'rating': book['rating']['Average'] | float() } %}
+					{% for i in range(index+1) %}
+						{% if (vars.rating >= 1) %}
+							<img class="rating-image" src={{ url_for('static', filename='images/site_images/full_star.png') }}></img>
+						{% elif (vars.rating == 0) %}	
+							<img></img>
+						{% else %}	
+							<img class="rating-image" src={{ url_for('static', filename='images/site_images/half_star.png') }}></img>
+						{% endif %}
+						{% if vars.update({'rating': vars.rating - 1}) %}{% endif %}
+					{% endfor %}
+					/5
+				</p>
+			{% endif %}
+		</div>
+		{% if 'http' in book['cover_image_url'] %}
+			<img class="aside-image" src={{ book['cover_image_url'] }}>
+		{% else %}
+			<img class="aside-image" src={{ url_for('static', filename=book['cover_image_url']) }}></img>
 		{% endif %}
-	</div>
+		<p>
+			<details>
+				<summary>See more!</summary>
+				<p>Max's rating was {{ book['rating']['Max']}} / 5</p>
+				<p>Helen's rating was {{ book['rating']['Helen']}} / 5</p>
+				<p>Bethany's rating was {{ book['rating']['Beth']}} / 5</p>
+			</details>
+		</p>
+	</p>
 {% endfor %}
 {% endblock %}

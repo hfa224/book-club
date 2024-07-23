@@ -40,6 +40,7 @@ def book_club_wrapped(name):
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     highest_rated_book = max(book_array, key=lambda book: book.rating[name])
     highest_rated_picked_book = max(picked_books, key=lambda book: book.rating["Average"])
+    genres = [finished_genre for genre in map(lambda x: x.genre, book_array) for split_genre in genre.split("/")]
     return render_template('book_club_wrapped.html', book_array=book_array, picked_books=picked_books, name=name, 
                            highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book)
 

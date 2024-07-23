@@ -3,8 +3,14 @@
 
 <head>
   <title>{% block title %}{% endblock %} - Berlin Beer and Book club</title>
-  <link rel="stylesheet" href="https://unpkg.com/bamboo.css" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/bamboo.css/dist/light.min.css" type="text/css">
   <style>
+
+    /*body {
+      max-width:90ch
+    }*/
+
+    /* centre to header logo */
     .center {
       display: block;
       margin-left: auto;
@@ -12,34 +18,50 @@
       width: 50%;
     }
 
+    /* centre the current book horizontally and vertically */
     .center-book {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: auto;
-      margin-right: auto;
-      width: 30%;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
     }
 
+    /* display the "about" button to the right */
     .right {
       float: right;
     }
 
+    /* set the size of the nav button */
     .nav-button {
       width: 100px;
       height: auto;
     }
 
+    /* set the size of the nav button */
+    .rating-image {
+      width: 20px;
+      height: auto;
+    }
+
+    /* set the size of the suprise button */
     .suprise-button {
       width: 50px;
       height: auto;
     }
 
+    /* set the size of the header logo */
     .logo-button {
       width: 300px;
       height: auto;
     }
 
+    /* use to rotate images slightly on hover */
     .img11 {
       transform: rotate(0deg);
       box-shadow: 0.5em 0.5em 0.5em #ccc;
@@ -50,11 +72,7 @@
       box-shadow: 0.5em 0.5em 0.5em #ccc;
     }
 
-    .credit-link {
-      transform: rotate(-12deg);
-      box-shadow: 0.5em 0.5em 0.5em #ccc;
-    }
-
+    /* add footer for credits */
     .footer {
       position: fixed;
       bottom: 0;
@@ -64,6 +82,7 @@
       font-size: .75rem;
     }
 
+    /* used to change the suprise button image on mouse-over */
     .foo img:last-child {
       display: none
     }
@@ -76,12 +95,30 @@
       display: inline-block
     }
 
+    /* used to set sprakly background image for current book */
     .bgimg {
-      background-image: url('static/images/background_star.png');
+      background-image: url('static/images/giphy.gif');
       background-size: 300px;
-      background-repeat:no-repeat;
       height: 300px;
-      background-position: center center;
+    }
+    /* version of magick css aside designed to put text next to images */
+    .image-aside {
+        float: right; /* 2 */
+        clear: right; /* 3 */
+        width: 60%; /* 4 */
+        margin: 1rem 1rem 1rem 1rem; /* 5 */
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* 5 */
+        border-left: 3px solid var(#000); /* 5 */
+        line-height: 0.7; /* 6 */
+    }
+
+    .aside-image {
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* 5 */
+    }
+
+    /* Prevent double top margins */
+    .image-aside h1, .image-aside h2, .image-aside h3, .image-aside h4 {
+        margin-top: 0;
     }
   </style>
 </head>
@@ -89,7 +126,7 @@
 <body>
   <!-- Page content -->
   {% set name = "Helen" %}
-  <div class="main">
+  <main>
     <header>
       <a href="/"><img class="center logo-button"
           src="{{ url_for('static', filename='images/site_images/BBandBC-2.png') }}"></img></a>
@@ -113,6 +150,6 @@
       - Flaticon</a><br>
     <a href="https://codepen.io/hexagoncircle/pen/wvOPmGO" title="gift icons">CSS for wrapped page by hexagoncircle</a>
   </div>
-</body>
+</main>
 
 </html>

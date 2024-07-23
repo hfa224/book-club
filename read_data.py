@@ -1,8 +1,11 @@
 import csv
 import requests
+import os
 
 from datetime import datetime
 
+# cache for book cover urls to avoid repeatedly querying open covers
+# to check if it has the book cover we want
 book_cover_urls = {}
 
 
@@ -20,15 +23,14 @@ class Book:
 
         rating = {"Helen": row[4], "Max": row[5], "Beth": row[6], "Average": row[8]}
 
-        print(book_cover_urls.keys())
+        #print(book_cover_urls.keys())
 
+        # check the cache first for this isbn
         if row[9] in book_cover_urls.keys():
-            print("found " + row[9] + " in cache")
+            #print("found " + row[9] + " in cache")
             cover_img = book_cover_urls[row[9]]
         else:
-            cover_img = get_book_image_url(
-                row[9]
-            )  # "https://covers.openlibrary.org/b/isbn/"+ row[9] + "-M.jpg"
+            cover_img = get_book_image_url(row[9])  # "https://covers.openlibrary.org/b/isbn/"+ row[9] + "-M.jpg"
             book_cover_urls[row[9]] = cover_img
 
         return Book(row[0], row[1], row[2], row[3], row[7], cover_img, rating)
@@ -50,10 +52,14 @@ def read_book_data():
 
 def get_book_image_url(isbn):
     image_url = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
-    if requests.head(image_url + "?default=false").status_code == 404:
-        return "images/book_covers/" + isbn + ".png"  # assume i've provided an image
-    else:
+    local_img_url = "images/book_covers/" + isbn + ".png"  # book cover images should by pngs named after the isbn
+    
+    if os.path.exists("static/" + local_img_url):
+        return local_img_url
+    elif requests.head(image_url + "?default=false").status_code != 404:
         return image_url
+    else:
+        return "images/cb08c741ede41b10539c45ac96f7b05c.gif"# just a place holder....
 
 
 def read_book_isbns():
@@ -73,3 +79,15 @@ def read_book_isbns():
         reverse=True,
     )
     return sorted_books
+
+def who_has_the_most_genres(book_array):
+    picked_books = sort_books_by_picker(book_array)
+    highest_rated_book = max(book_array, key=lambda book: book.rating[name])
+    highest_rated_picked_book = max(picked_books, key=lambda book: book.rating["Average"])
+    return sorted_books
+
+def sort_books_by_picker(book_array):
+    return {book.picker:book for book in book_array}
+
+def get_all_genres(book_list):
+    return [finished_genre for genre in map(lambda x: x.genre, book_list) for split_genre in genre.split("/")]
