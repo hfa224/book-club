@@ -9,10 +9,13 @@
 <div class="bgimg">
 <!--h3>{{ current_book['title'] }} by  {{ current_book['author'] }} picked by  {{ current_book['picker'] }} in  {{ current_book['date'] }}</h3-->
 <div class="image-aside">
-	<p><b>Title: </b>{{ current_book['title'] }} </p>
-	<p><b>Author: </b>{{ current_book['author'] }}</p>
-	<p><b>Genre: </b>{{ current_book['genre'] }}</p>
-	<p><b>Chosen by: </b>{{ current_book['picker'] }} on {{ current_book['date'] }}</p>
+	<p>
+		<b>Title: </b>{{ current_book['title'] }}<br>
+		<b>Author: </b>{{ current_book['author'] }}<br>
+		<b>Genre: </b>{{ current_book['genre'] }}<br>
+		<b>Chosen by: </b>{{ current_book['picker'] }} on {{ current_book['date'] }}
+	</p>
+	<p>The next book will be picked by Helen in August ☀️</p>
 	</div>
 	{% if 'http' in current_book['cover_image_url'] %}
 	<img class="aside-image" src={{ current_book['cover_image_url'] }}>
@@ -25,26 +28,26 @@
 	<p>
 		{% set index =  book['rating']['Average'] | int() %}
 		<div class="image-aside">
-			<p><b>Title: </b>{{ book['title'] }} </p>
-			<p><b>Author: </b>{{ book['author'] }}</p>
-			<p><b>Genre: </b>{{ book['genre'] }}</p>
-			<p><b>Chosen by: </b>{{ book['picker'] }} on {{ book['date'] }}</p>
-			{% if index > 0 %}
-				<p>The average rating was
-					{% set vars = {'rating': book['rating']['Average'] | float() } %}
-					{% for i in range(index+1) %}
-						{% if (vars.rating >= 1) %}
-							<img class="rating-image" src={{ url_for('static', filename='images/site_images/full_star.png') }}></img>
-						{% elif (vars.rating == 0) %}	
-							<img></img>
-						{% else %}	
-							<img class="rating-image" src={{ url_for('static', filename='images/site_images/half_star.png') }}></img>
-						{% endif %}
-						{% if vars.update({'rating': vars.rating - 1}) %}{% endif %}
-					{% endfor %}
-					/5
-				</p>
-			{% endif %}
+			<p>
+				<b>Title: </b>{{ book['title'] }}<br>
+				<b>Author: </b>{{ book['author'] }}<br>
+				<b>Genre: </b>{{ book['genre'] }}<br>
+				<b>Chosen by: </b>{{ book['picker'] }} on {{ book['date'] }}
+			</p>
+			<p>The average rating was
+				{% set vars = {'rating': book['rating']['Average'] | float() } %}
+				{% for i in range(index+1) %}
+					{% if (vars.rating >= 1) %}
+						<img class="rating-image" src={{ url_for('static', filename='images/site_images/full_star.png') }}></img>
+					{% elif (vars.rating == 0) %}	
+						<img></img>
+					{% else %}	
+						<img class="rating-image" src={{ url_for('static', filename='images/site_images/half_star.png') }}></img>
+					{% endif %}
+					{% if vars.update({'rating': vars.rating - 1}) %}{% endif %}
+				{% endfor %}
+				/5
+			</p>
 		</div>
 		{% if 'http' in book['cover_image_url'] %}
 			<img class="aside-image" src={{ book['cover_image_url'] }}>

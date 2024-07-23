@@ -109,7 +109,7 @@
         margin: 1rem 1rem 1rem 1rem; /* 5 */
         padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* 5 */
         border-left: 3px solid var(#000); /* 5 */
-        line-height: 0.7; /* 6 */
+        line-height: 1.3; /* 6 */
     }
 
     .aside-image {
@@ -133,10 +133,11 @@
       <div>
         <a href="{{ url_for('book_club_about') }}"><img class="nav-button"
             src="{{ url_for('static', filename='images/site_images/about.png') }}"></a>
-        <a class="foo right action" href="{{ url_for('wrapped_helen') }}">
+            <!--comment out wrapped gif for now-->
+        <!-- a class="foo right action" href="{{ url_for('wrapped_helen') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-shut.png') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-open.png') }}">
-        </a>
+        </a -->
       </div>
       {% block header %}{% endblock %}
     </header>
