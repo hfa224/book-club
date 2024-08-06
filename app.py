@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from read_data import read_book_data, read_book_isbns
+from read_data import read_book_data, read_book_isbns, who_has_the_most_genres
 import os
 from datetime import datetime
 
@@ -36,6 +36,7 @@ def wrapped_helen():
 
 def book_club_wrapped(name):
     book_array = read_book_isbns()
+    print(who_has_the_most_genres(book_array))
     
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     highest_rated_book = max(book_array, key=lambda book: book.rating[name])

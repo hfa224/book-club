@@ -7,14 +7,12 @@
               --c1: #fbda61;
               --c2: #ff5acd;
               --c3: #2563eb;
-              --gradient: linear-gradient(
-                60deg,
-                var(--c3),
-                var(--c2),
-                var(--c1),
-                var(--c2),
-                var(--c3)
-              );
+              --gradient: linear-gradient(60deg,
+                  var(--c3),
+                  var(--c2),
+                  var(--c1),
+                  var(--c2),
+                  var(--c3));
               --scale-start: 0.5;
               --scale-end: 1.001;
               --hover-offset: 5%;
@@ -24,12 +22,10 @@
                 https://linear-easing-generator.netlify.app/
               */
               /* prettier-ignore */
-              --ease-elastic: linear(
-                0, 0.186 2.1%, 0.778 7.2%, 1.027 9.7%, 1.133, 1.212, 1.264, 1.292 15.4%,
-                1.296, 1.294, 1.285, 1.269 18.9%, 1.219 20.9%, 1.062 25.8%, 0.995 28.3%,
-                0.944 31.1%, 0.93, 0.921, 0.92 35.7%, 0.926, 0.94 39.7%, 1.001 47%, 1.014,
-                1.021 52.4%, 1.02 56.4%, 1 65.5%, 0.994 70.7%, 1.001 88.4%, 1
-              );
+              --ease-elastic: linear(0, 0.186 2.1%, 0.778 7.2%, 1.027 9.7%, 1.133, 1.212, 1.264, 1.292 15.4%,
+                  1.296, 1.294, 1.285, 1.269 18.9%, 1.219 20.9%, 1.062 25.8%, 0.995 28.3%,
+                  0.944 31.1%, 0.93, 0.921, 0.92 35.7%, 0.926, 0.94 39.7%, 1.001 47%, 1.014,
+                  1.021 52.4%, 1.02 56.4%, 1 65.5%, 0.994 70.7%, 1.001 88.4%, 1);
               --ease-bounce-out: cubic-bezier(0.34, 1.56, 0.64, 1);
             }
 
@@ -129,6 +125,7 @@
               from {
                 opacity: 0;
               }
+
               to {
                 opacity: 1;
               }
@@ -144,6 +141,7 @@
               from {
                 scale: var(--scale-start);
               }
+
               to {
                 scale: var(--scale-end);
               }
@@ -159,6 +157,7 @@
               from {
                 scale: var(--scale-end);
               }
+
               to {
                 color: var(--color);
                 scale: var(--scale-start);
@@ -166,14 +165,17 @@
             }
 
             @keyframes wink {
+
               0%,
               100% {
                 translate: 0 0;
               }
+
               25%,
               75% {
                 translate: -100% 0;
               }
+
               50% {
                 translate: -200% 0;
               }
@@ -186,10 +188,12 @@
             }
 
             @keyframes hover {
+
               from,
               to {
                 translate: 0 calc(var(--hover-offset) * -1);
               }
+
               50% {
                 translate: 0 var(--hover-offset);
               }
