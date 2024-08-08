@@ -81,20 +81,15 @@ def read_book_isbns():
     return sorted_books
 
 def who_has_the_most_genres(book_array):
-    picked_books = sort_books_by_picker(book_array)
-    genres_dict = {}
-    for key, value in picked_books.items():
-        genres_dict[key] = get_all_genres(value)
+    books_by_picker = {}
+    for book in book_array:
+        if book.picker not in books_by_picker:
+            books_by_picker[book.picker] = set([])
+        for split_genre in book.genre.split("/"):
+            books_by_picker[book.picker].add(split_genre)
+        
+    
+    highest_number_of_genres = dict((k, len(v)) for k, v in books_by_picker.items())
+    return max(highest_number_of_genres, key=highest_number_of_genres.get)
 
-    highest_number_of_genres = max(genres_dict, key=lambda key: genres_dict.get(key).size())
-    return highest_number_of_genres
 
-def sort_books_by_picker(book_array):
-    return {book.picker:book for book in book_array}
-
-def get_all_genres(book_array):
-    genres = []
-    for genre in map(lambda x: x.genre, book_array):
-        for split_genre in genre.split("/"):
-            genres.append(split_genre)
-    return genres
