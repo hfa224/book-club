@@ -7,7 +7,6 @@
 {% block content %}
 <img class="center" style="width:200; height:auto;" src={{ url_for('static', filename="images/site_images/current_book.png") }}></img>
 <div class="bgimg">
-<!--h3>{{ current_book['title'] }} by  {{ current_book['author'] }} picked by  {{ current_book['picker'] }} in  {{ current_book['date'] }}</h3-->
 <div class="image-aside">
 	<p>
 		<b>Title: </b>{{ current_book['title'] }}<br>
@@ -15,7 +14,7 @@
 		<b>Genre: </b>{{ current_book['genre'] }}<br>
 		<b>Chosen by: </b>{{ current_book['picker'] }} on {{ current_book['date'] }}
 	</p>
-	<p>The next book will be picked by Helen in August ☀️</p>
+	<p>The next book will be picked by Helen on Monday!</p>
 	</div>
 	{% if 'http' in current_book['cover_image_url'] %}
 	<img class="aside-image" src={{ current_book['cover_image_url'] }}>

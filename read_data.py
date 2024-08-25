@@ -59,7 +59,7 @@ def get_book_image_url(isbn):
     elif requests.head(image_url + "?default=false").status_code != 404:
         return image_url
     else:
-        return "images/cb08c741ede41b10539c45ac96f7b05c.gif"# just a place holder....
+        return "images/book_covers/mystery_book.png"# just a place holder....
 
 
 def read_book_isbns():
