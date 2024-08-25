@@ -89,7 +89,8 @@ def who_has_the_most_genres(book_array):
             books_by_picker[book.picker].add(split_genre)
         
     
-    highest_number_of_genres = dict((k, len(v)) for k, v in books_by_picker.items())
-    return max(highest_number_of_genres, key=highest_number_of_genres.get)
+    genres_dict = dict((k, len(v)) for k, v in books_by_picker.items())
+    winner = max(genres_dict, key=genres_dict.get);
+    return (winner, "you have the most diverse amount of genres with " + str(genres_dict.get(winner)) + " genres!")
 
 
