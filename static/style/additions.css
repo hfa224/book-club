@@ -10,20 +10,6 @@
     width: 50%;
 }
 
-/* centre the current book horizontally and vertically */
-.center-book {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
 /* display the "about" button to the right */
 .right {
     float: right;
@@ -129,8 +115,10 @@
 @media (max-width: 600px) {
     /* version of magick css aside designed to put text next to images */
     .aside-image {
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-        width: 100%
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
     }
     /* version of magick css aside designed to put text next to images */
     .image-aside {
