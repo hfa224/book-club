@@ -42,7 +42,7 @@
               padding-inline: 1rem;
               font-family: system-ui;
               font-weight: 800;
-              font-size: calc(1rem + 10vmin);
+              font-size: calc(1rem + 5vmin);
               text-align: center;
               overflow-x: hidden;
             }
@@ -75,7 +75,7 @@
             .text {
               margin-inline: auto;
               padding-block: 0.2em;
-              max-inline-size: 15ch;
+              max-inline-size: 20ch;
               text-wrap: balance;
               background-image: var(--gradient);
               background-size: 400%;

@@ -36,7 +36,9 @@ def wrapped_helen():
 
 def book_club_wrapped(name):
     book_array = read_book_isbns()
-    print(who_has_the_most_genres(book_array))
+    winner = []
+    if name in who_has_the_most_genres(book_array):
+        winner.append(who_has_the_most_genres(book_array))
     
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     highest_rated_book = max(book_array, key=lambda book: book.rating[name])
@@ -46,7 +48,8 @@ def book_club_wrapped(name):
         for split_genre in genre.split("/"):
             genres.append(split_genre)
     return render_template('book_club_wrapped.html', book_array=book_array, picked_books=picked_books, name=name, 
-                           highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book, genres=genres)
+                           highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book, genres=genres,
+                           winner=winner)
 
 @app.route('/<string:name>/book_club_stats/')
 def book_club_stats(name):
