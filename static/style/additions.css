@@ -130,6 +130,13 @@
     /* version of magick css aside designed to put text next to images */
     .aside-image {
         padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-        width: 35%
+        width: 100%
+    }
+    /* version of magick css aside designed to put text next to images */
+    .image-aside {
+        width: 100%;
+        margin: 1rem 1rem 1rem 1rem;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        line-height: 1.3;
     }
 }
