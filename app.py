@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from read_data import read_book_data, read_book_isbns
+from read_data import read_book_data, read_book_isbns, who_has_the_most_genres
 import os
 from datetime import datetime
 
@@ -36,13 +36,20 @@ def wrapped_helen():
 
 def book_club_wrapped(name):
     book_array = read_book_isbns()
+    winner = []
+    if name in who_has_the_most_genres(book_array):
+        winner.append(who_has_the_most_genres(book_array))
     
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     highest_rated_book = max(book_array, key=lambda book: book.rating[name])
     highest_rated_picked_book = max(picked_books, key=lambda book: book.rating["Average"])
-    #genres = [finished_genre for genre in map(lambda x: x.genre, book_array) for split_genre in genre.split("/")]
+    genres = []
+    for genre in map(lambda x: x.genre, book_array):
+        for split_genre in genre.split("/"):
+            genres.append(split_genre)
     return render_template('book_club_wrapped.html', book_array=book_array, picked_books=picked_books, name=name, 
-                           highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book)
+                           highest_rated_book=highest_rated_book, highest_rated_picked_book=highest_rated_picked_book, genres=genres,
+                           winner=winner)
 
 @app.route('/<string:name>/book_club_stats/')
 def book_club_stats(name):

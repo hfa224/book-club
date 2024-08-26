@@ -20,10 +20,12 @@
   <p class="text">In {{ genres|length }} genres...</p>
 </div>
 <div class="box">
-  <p class="text">{{ genres }}</p>
+  
+  <p class="text">{%for genre in genres%}{{genre}}{{ ", " if not loop.last else "" }} {% endfor %}</p>
+  
 </div>
 <div class="box">
-  <p class="text">Your highest rated book is {{highest_rated_book['title']}}</p>
+  <p class="text">The book you rated highest was {{highest_rated_book['title']}}</p>
   {% set cover_img_url =  highest_rated_book['cover_image_url'] %}
   {% if 'http' in highest_rated_book['cover_image_url'] %}
     <img class="tag" src={{cover_img_url}}>
@@ -43,7 +45,7 @@
   {% endfor %}
 </div>
 <div class="box">
-  <p class="text">Your most liked book was {{highest_rated_picked_book['title']}} </p>
+  <p class="text">The book you picked that was rated the highest was {{highest_rated_picked_book['title']}} </p>
   {% set cover_img_url =  highest_rated_picked_book['cover_image_url'] %}
   {% if 'http' in highest_rated_picked_book['cover_image_url'] %}
     <img class="tag" src={{cover_img_url}}>
@@ -51,10 +53,15 @@
     <img src={{ url_for('static', filename=cover_img_url) }}></img>
   {% endif %}
 </div>
-<!--div class="smile" role="img" aria-hidden>
-  <div>
-    <span>🙂</span>
-    <span>😉</span>
-  </div -->
+<div class="box">
+  
+  {% for win in winner %}
+  <p class="text">{{win[1]}} </p>
+  {% endfor %}
+</div>
+<div class="box">
+  <p class="text">Happy book club anniversary!!</p>
+  <span>🎂 🥳</span>
+</div>
 </div>
 </body>
