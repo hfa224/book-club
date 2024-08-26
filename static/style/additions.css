@@ -51,11 +51,11 @@
 }
 
 /* add footer for credits */
+
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    text-align: center; 
+    margin-top: 2rem; 
+    margin-bottom: 2rem; 
     height: 50px;
     font-size: .75rem;
 }
@@ -75,9 +75,10 @@
 
 /* used to set sprakly background image for current book */
 .bgimg {
-    background-image: url('static/images/giphy.gif');
+    background-image: url('../images/giphy.gif');
     background-size: 300px;
     height: 300px;
+    background-repeat: repeat-x;
 }
 
 /* version of magick css aside designed to put text next to images */
@@ -110,6 +111,7 @@
 .image-aside h4 {
     margin-top: 0;
 }
+
 
 /* On mobile devices, display image aside below image */
 @media (max-width: 600px) {
