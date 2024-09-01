@@ -16,9 +16,11 @@ then run the app.
 
 Run python app.py
 
-## Deployed
+## Deploy
 
-Currently deployed on https://playful-fox-d178c6.netlify.app/ as a static site, using Flask-freeze
+This site can be deployed as a static website by running python freeze.py, which will then put static site files in a "build" folder.
+
+This site is deployed on https://playful-fox-d178c6.netlify.app/
 
 ## Tutorials
 

@@ -32,7 +32,8 @@ def wrapped_beth():
 
 @app.route('/book_club_wrapped/helen/')
 def wrapped_helen():
-    return book_club_wrapped("Helen")
+    return render_template('helen_pw_protected.html')
+    #return book_club_wrapped("Helen")
 
 def book_club_wrapped(name):
     book_array = read_book_isbns()
