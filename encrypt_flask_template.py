@@ -12,30 +12,31 @@ try:
     from Crypto.Hash import SHA256
 except:
     print('install pycrypto: "pip3 install pycrypto"')
-    exit(1)
-import os, sys
+    sys.exit(1)
+import os
+import sys
 from base64 import b64encode
 from getpass import getpass
 import codecs
 
 
-def encrypt(tupleList):
+def encrypt(tuple_list):
 
-    projectFolder = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(projectFolder, "templates/decryptTemplate.html")) as f:
-        templateHTML = f.read()
+    project_folder = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(project_folder, "templates/decryptTemplate.html")) as f:
+        template_HTML = f.read()
 
-    encryptedDocument = templateHTML
+    encrypted_doc = template_HTML
 
-    for tuple in tupleList:
+    for user_info_tuple in tuple_list:
 
-        print(tuple[0])
+        print(user_info_tuple[0])
 
-        data = tuple[1].encode("utf8")
+        data = user_info_tuple[1].encode("utf8")
 
         salt = Random.new().read(32)
         key = PBKDF2(
-            tuple[2].encode("utf-8"),
+            user_info_tuple[2].encode("utf-8"),
             salt,
             count=100000,
             dkLen=32,
@@ -46,8 +47,7 @@ def encrypt(tupleList):
         cipher = AES.new(key, AES.MODE_GCM, nonce=iv)
         encrypted, tag = cipher.encrypt_and_digest(data)
 
-        encryptedPl = f'"{b64encode(salt+iv+encrypted+tag).decode("utf-8")}"'
-        replaceString = "/*{{" + tuple[0] + '}}*/""'
-        print(replaceString)
-        encryptedDocument = encryptedDocument.replace(replaceString, encryptedPl)
-    return encryptedDocument
+        encrypted_pl = f'"{b64encode(salt+iv+encrypted+tag).decode("utf-8")}"'
+        replace_string = "/*{{" + user_info_tuple[0] + '}}*/""'
+        encrypted_doc = encrypted_doc.replace(replace_string, encrypted_pl)
+    return encrypted_doc

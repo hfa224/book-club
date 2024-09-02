@@ -33,12 +33,12 @@ def book_club_about():
 @app.route("/book_club_wrapped/")
 def wrapped():
     # create a list of tuples
-    list = [
+    tuple_list = [
         ("M_ENCRYPTED_PAYLOAD", book_club_wrapped("Max"), "max2024"),
         ("B_ENCRYPTED_PAYLOAD", book_club_wrapped("Beth"), "beth2024"),
         ("H_ENCRYPTED_PAYLOAD", book_club_wrapped("Helen"), "helen2024"),
     ]
-    return encrypt(list)
+    return encrypt(tuple_list)
 
 
 def book_club_wrapped(name):
@@ -48,7 +48,8 @@ def book_club_wrapped(name):
         winner.append(who_has_the_most_genres(book_array))
 
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
-    highest_rated_book = max(book_array, key=lambda book: book.rating[name])
+    # we need to filter dnfs out here
+    highest_rated_book = max(book_array, key=lambda book: book.rating[name] )
     highest_rated_picked_book = max(
         picked_books, key=lambda book: book.rating["Average"]
     )
