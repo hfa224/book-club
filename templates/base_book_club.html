@@ -7,7 +7,8 @@
   <!-- add custom styling additions -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style/additions.css') }}">
   <meta charset="UTF-8">
-  <meta name="description" content="This is a website created for a book club set up by three friends on a trip to Berlin">
+  <meta name="description"
+    content="This is a website created for a book club set up by three friends on a trip to Berlin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <!-- Not set up yet -->
@@ -24,11 +25,11 @@
       <div>
         <a href="{{ url_for('book_club_about') }}"><img class="nav-button"
             src="{{ url_for('static', filename='images/site_images/about.png') }}"></a>
-            <!--comment out wrapped gif for now-->
-        <a class="image-swap right action" href="{{ url_for('wrapped') }}">
+        <!--comment out wrapped gif for now-->
+        <!-- a class="image-swap right action" href="{{ url_for('wrapped') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-shut.png') }}">
           <img class="suprise-button" src="{{ url_for('static', filename='images/site_images/gift-box-open.png') }}">
-        </a>
+        </a -->
       </div>
       {% block header %}{% endblock %}
     </header>
@@ -36,13 +37,15 @@
     <div class="flash">{{ message }}</div>
     {% endfor %}
     {% block content %}{% endblock %}
-  </div>
-  <div class="footer">
-    <hr>
-    <a href="https://www.flaticon.com/free-icons/gift" title="gift icons">Gift icons created by amonrat rungreangfangsai
-      - Flaticon</a> | 
-    <a href="https://codepen.io/hexagoncircle/pen/wvOPmGO" title="gift icons">CSS for wrapped page by hexagoncircle</a>
-  </div>
-</main>
+    </div>
+    <div class="footer">
+      <hr>
+      <a href="https://www.flaticon.com/free-icons/gift" title="gift icons">Gift icons created by amonrat
+        rungreangfangsai
+        - Flaticon</a> |
+      <a href="https://codepen.io/hexagoncircle/pen/wvOPmGO" title="gift icons">CSS for wrapped page by
+        hexagoncircle</a>
+    </div>
+  </main>
 
 </html>

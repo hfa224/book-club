@@ -6,24 +6,28 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>Password Protected Page</title>
-    <style>
-        html, body {
+    <style>       
+        @import url('https://fonts.googleapis.com/css2?family=Solway:wght@400;700&display=swap');
+        html,
+        body {
             margin: 0;
             width: 100%;
             height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Solway, Arial, Helvetica, sans-serif;
             background-image: linear-gradient(#FBDA61, #FF5ACD)
         }
+
         #dialogText {
             color: #FFFFFF;
             background-color: transparent;
         }
-        
+
         #dialogWrap {
             position: absolute;
             top: 0;
@@ -31,19 +35,19 @@
             width: 100%;
             height: 100%;
             display: table;
-            background-image: linear-gradient(#FBDA61, #FF5ACD)
+            background-image: linear-gradient(#FBDA61, #FF5ACD, #79F4F8)
         }
-        
+
         #dialogWrapCell {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
         }
-        
+
         #mainDialog {
             max-width: 400px;
             margin: 5px;
-            border: solid #DC21A0 1px;
+            border: solid #DC21A0 2px;
             border-radius: 10px;
             margin-left: auto;
             margin-right: auto;
@@ -51,48 +55,58 @@
             overflow: hidden;
             text-align: left;
         }
-        #mainDialog > * {
+
+        #mainDialog>* {
             padding: 10px 30px;
         }
+
         #passArea {
             padding: 20px 30px;
             background-color: transparent;
         }
-        #passArea > * {
+
+        #passArea>* {
             margin: 5px auto;
         }
-        #pass, #userName {
+
+        #pass,
+        #userName {
             width: 100%;
             height: 40px;
             font-size: 30px;
+            background-color: transparent;
+            border: solid #DC21A0 2px;
+            font-family: Solway, Arial, Helvetica, sans-serif;
         }
-        
+
         #messageWrapper {
             float: left;
             vertical-align: middle;
             line-height: 30px;
         }
-        
+
         .notifyText {
             display: none;
         }
-        
+
         #invalidPass {
             color: red;
         }
-        
+
         #success {
             color: green;
         }
-        
+
         #submitPass {
             font-size: 20px;
             border-radius: 5px;
             background-color: transparent;
-            border: solid gray 1px;
+            border: solid #DC21A0 2px;
             float: right;
             cursor: pointer;
+            font-family: Solway, Arial, Helvetica, sans-serif;
         }
+
         #contentFrame {
             position: absolute;
             top: 0;
@@ -100,6 +114,7 @@
             width: 100%;
             height: 100%;
         }
+
         #attribution {
             position: absolute;
             bottom: 0;
@@ -110,21 +125,25 @@
             font-weight: bold;
             font-size: 0.8em;
         }
-        #attribution, #attribution a {
+
+        #attribution,
+        #attribution a {
             color: #333;
         }
+
         .error {
             display: none;
             color: red;
         }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
     <div id="dialogWrap">
         <div id="dialogWrapCell">
             <div id="mainDialog">
-                <div id="dialogText">This page is password protected.</div>
+                <div id="dialogText">Enter your name and password</div>
                 <div id="passArea">
                     <p id="userNamePrompt">User name</p>
                     <input id="userName" type="text" name="user" autofocus>
@@ -143,7 +162,8 @@
                 </div>
                 <div id="securecontext" class="error">
                     <p>
-                        Sorry, but password protection only works over a secure connection. Please load this page via HTTPS.
+                        Sorry, but password protection only works over a secure connection. Please load this page via
+                        HTTPS.
                     </p>
                 </div>
                 <div id="nocrypto" class="error">
@@ -158,119 +178,119 @@
         Protected by <a href="https://www.maxlaumeister.com/pagecrypt/">PageCrypt</a>
     </div>
     <script>
-    (function() {
+        (function () {
 
-        var helen_pl = /*{{H_ENCRYPTED_PAYLOAD}}*/"";
-        var max_pl = /*{{M_ENCRYPTED_PAYLOAD}}*/"";
-        var beth_pl = /*{{B_ENCRYPTED_PAYLOAD}}*/"";
+            var helen_pl = /*{{H_ENCRYPTED_PAYLOAD}}*/"";
+            var max_pl = /*{{M_ENCRYPTED_PAYLOAD}}*/"";
+            var beth_pl = /*{{B_ENCRYPTED_PAYLOAD}}*/"";
 
-        const plMap = new Map([
-            ["Helen", helen_pl],
-            ["Max", max_pl],
-            ["Beth", beth_pl]
-        ]);
-        
-        var submitPass = document.getElementById('submitPass');
-        var passEl = document.getElementById('pass');
-        var userEl = document.getElementById('userName');
-        var invalidPassEl = document.getElementById('invalidPass');
-        var trycatcherror = document.getElementById('trycatcherror');
-        var successEl = document.getElementById('success');
-        var contentFrame = document.getElementById('contentFrame');
-        
-        // Sanity checks
+            const plMap = new Map([
+                ["Helen", helen_pl],
+                ["Max", max_pl],
+                ["Beth", beth_pl]
+            ]);
 
-        //if (pl === "") {
-        //    submitPass.disabled = true;
-        //    passEl.disabled = true;
-        //    alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
-        //    return;
-        //}
+            var submitPass = document.getElementById('submitPass');
+            var passEl = document.getElementById('pass');
+            var userEl = document.getElementById('userName');
+            var invalidPassEl = document.getElementById('invalidPass');
+            var trycatcherror = document.getElementById('trycatcherror');
+            var successEl = document.getElementById('success');
+            var contentFrame = document.getElementById('contentFrame');
 
-        if (!isSecureContext) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#securecontext").style.display = "block";
-            return;
-        }
+            // Sanity checks
 
-        if (!crypto.subtle) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#nocrypto").style.display = "block";
-            return;
-        }
-        
-        function str2ab(str) {
-            var ustr = atob(str);
-            var buf = new ArrayBuffer(ustr.length);
-            var bufView = new Uint8Array(buf);
-            for (var i=0, strLen=ustr.length; i < strLen; i++) {
-                bufView[i] = ustr.charCodeAt(i);
+            //if (pl === "") {
+            //    submitPass.disabled = true;
+            //    passEl.disabled = true;
+            //    alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
+            //    return;
+            //}
+
+            if (!isSecureContext) {
+                document.querySelector("#passArea").style.display = "none";
+                document.querySelector("#securecontext").style.display = "block";
+                return;
             }
-            return bufView;
-        }
 
-        async function deriveKey(salt, password) {
-            const encoder = new TextEncoder()
-            const baseKey = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                'PBKDF2',
-                false,
-                ['deriveKey'],
-            )
-            return await crypto.subtle.deriveKey(
-                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-                baseKey,
-                { name: 'AES-GCM', length: 256 },
-                true,
-                ['decrypt'],
-            )
-        }
-        
-        async function doSubmit(evt) {
-            submitPass.disabled = true;
-            passEl.disabled = true;
+            if (!crypto.subtle) {
+                document.querySelector("#passArea").style.display = "none";
+                document.querySelector("#nocrypto").style.display = "block";
+                return;
+            }
 
-            
-            // check the username here and switch hashes
+            function str2ab(str) {
+                var ustr = atob(str);
+                var buf = new ArrayBuffer(ustr.length);
+                var bufView = new Uint8Array(buf);
+                for (var i = 0, strLen = ustr.length; i < strLen; i++) {
+                    bufView[i] = ustr.charCodeAt(i);
+                }
+                return bufView;
+            }
 
-            var userName = userEl.value;
-            pl = plMap.get(userName);
+            async function deriveKey(salt, password) {
+                const encoder = new TextEncoder()
+                const baseKey = await crypto.subtle.importKey(
+                    'raw',
+                    encoder.encode(password),
+                    'PBKDF2',
+                    false,
+                    ['deriveKey'],
+                )
+                return await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                    baseKey,
+                    { name: 'AES-GCM', length: 256 },
+                    true,
+                    ['decrypt'],
+                )
+            }
 
-            if (pl === "") {
+            async function doSubmit(evt) {
                 submitPass.disabled = true;
                 passEl.disabled = true;
-                alert("No page available for this user name :(");
-                return;
-            }
 
-            let iv, ciphertext, key;
-            
-            try {
-                var unencodedPl = str2ab(pl);
 
-                const salt = unencodedPl.slice(0, 32)
-                iv = unencodedPl.slice(32, 32 + 16)
-                ciphertext = unencodedPl.slice(32 + 16)
+                // check the username here and switch hashes
 
-                key = await deriveKey(salt, passEl.value);
-            } catch (e) {
-                trycatcherror.style.display = "inline";
-                console.error(e);
-                return;
-            }
+                var userName = userEl.value;
+                pl = plMap.get(userName);
 
-            try {
-                const decryptedArray = new Uint8Array(
-                    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
-                );
+                if (pl === "") {
+                    submitPass.disabled = true;
+                    passEl.disabled = true;
+                    alert("No page available for this user name :(");
+                    return;
+                }
 
-                let decrypted = new TextDecoder().decode(decryptedArray);
+                let iv, ciphertext, key;
 
-                if (decrypted === "") throw "No data returned";
+                try {
+                    var unencodedPl = str2ab(pl);
 
-                const basestr = '<base href="." target="_top">';
-                const anchorfixstr = `
+                    const salt = unencodedPl.slice(0, 32)
+                    iv = unencodedPl.slice(32, 32 + 16)
+                    ciphertext = unencodedPl.slice(32 + 16)
+
+                    key = await deriveKey(salt, passEl.value);
+                } catch (e) {
+                    trycatcherror.style.display = "inline";
+                    console.error(e);
+                    return;
+                }
+
+                try {
+                    const decryptedArray = new Uint8Array(
+                        await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
+                    );
+
+                    let decrypted = new TextDecoder().decode(decryptedArray);
+
+                    if (decrypted === "") throw "No data returned";
+
+                    const basestr = '<base href="." target="_top">';
+                    const anchorfixstr = `
                     <script>
                         Array.from(document.links).forEach((anchor) => {
                             const href = anchor.getAttribute("href");
@@ -285,45 +305,46 @@
                         });
                     <\/script>
                 `;
-                
-                // Set default iframe link targets to _top so all links break out of the iframe
-                if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
-                else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
-                else decrypted = basestr + decrypted;
 
-                // Fix fragment links
-                if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
-                else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
-                else decrypted = decrypted + anchorfixstr;
-                
-                contentFrame.srcdoc = decrypted;
-                
-                successEl.style.display = "inline";
-                setTimeout(function() {
-                    dialogWrap.style.display = "none";
-                }, 1000);
-            } catch (e) {
-                invalidPassEl.style.display = "inline";
-                passEl.value = "";
-                submitPass.disabled = false;
-                passEl.disabled = false;
-                console.error(e);
-                return;
+                    // Set default iframe link targets to _top so all links break out of the iframe
+                    if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
+                    else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
+                    else decrypted = basestr + decrypted;
+
+                    // Fix fragment links
+                    if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
+                    else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
+                    else decrypted = decrypted + anchorfixstr;
+
+                    contentFrame.srcdoc = decrypted;
+
+                    successEl.style.display = "inline";
+                    setTimeout(function () {
+                        dialogWrap.style.display = "none";
+                    }, 1000);
+                } catch (e) {
+                    invalidPassEl.style.display = "inline";
+                    passEl.value = "";
+                    submitPass.disabled = false;
+                    passEl.disabled = false;
+                    console.error(e);
+                    return;
+                }
             }
-        }
-        
-        submitPass.onclick = doSubmit;
-        passEl.onkeypress = function(e){
-            if (!e) e = window.event;
-            var keyCode = e.keyCode || e.which;
-            invalidPassEl.style.display = "none";
-            if (keyCode == '13'){
-              // Enter pressed
-              doSubmit();
-              return false;
+
+            submitPass.onclick = doSubmit;
+            passEl.onkeypress = function (e) {
+                if (!e) e = window.event;
+                var keyCode = e.keyCode || e.which;
+                invalidPassEl.style.display = "none";
+                if (keyCode == '13') {
+                    // Enter pressed
+                    doSubmit();
+                    return false;
+                }
             }
-        }
-    })();
+        })();
     </script>
-  </body>
+</body>
+
 </html>
