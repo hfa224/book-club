@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+<!--
+# Based on PageCrypt
+# Original code is
+# Copyright (c) 2021 Maximillian Laumeister
+# Copyright (c) 2021 Samuel Plumppu
+-->
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -11,10 +17,11 @@
             width: 100%;
             height: 100%;
             font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(#FBDA61, #FF5ACD)
         }
         #dialogText {
-            color: white;
-            background-color: #333333;
+            color: #FFFFFF;
+            background-color: transparent;
         }
         
         #dialogWrap {
@@ -24,7 +31,7 @@
             width: 100%;
             height: 100%;
             display: table;
-            background-color: #EEEEEE;
+            background-image: linear-gradient(#FBDA61, #FF5ACD)
         }
         
         #dialogWrapCell {
@@ -36,12 +43,11 @@
         #mainDialog {
             max-width: 400px;
             margin: 5px;
-            border: solid #AAAAAA 1px;
+            border: solid #DC21A0 1px;
             border-radius: 10px;
-            box-shadow: 3px 3px 5px 3px #AAAAAA;
             margin-left: auto;
             margin-right: auto;
-            background-color: #FFFFFF;
+            background-color: transparent;
             overflow: hidden;
             text-align: left;
         }
@@ -50,12 +56,12 @@
         }
         #passArea {
             padding: 20px 30px;
-            background-color: white;
+            background-color: transparent;
         }
         #passArea > * {
             margin: 5px auto;
         }
-        #pass {
+        #pass, #userName {
             width: 100%;
             height: 40px;
             font-size: 30px;
@@ -82,7 +88,7 @@
         #submitPass {
             font-size: 20px;
             border-radius: 5px;
-            background-color: #E7E7E7;
+            background-color: transparent;
             border: solid gray 1px;
             float: right;
             cursor: pointer;
@@ -105,7 +111,7 @@
             font-size: 0.8em;
         }
         #attribution, #attribution a {
-            color: #999;
+            color: #333;
         }
         .error {
             display: none;
@@ -120,8 +126,10 @@
             <div id="mainDialog">
                 <div id="dialogText">This page is password protected.</div>
                 <div id="passArea">
+                    <p id="userNamePrompt">User name</p>
+                    <input id="userName" type="text" name="user" autofocus>
                     <p id="passwordPrompt">Password</p>
-                    <input id="pass" type="password" name="pass" autofocus>
+                    <input id="pass" type="password" name="pass">
                     <div>
                         <span id="messageWrapper">
                             <span id="invalidPass" class="error">Sorry, please try again.</span>
@@ -152,10 +160,19 @@
     <script>
     (function() {
 
-        var pl = "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";
+        var helen_pl = /*{{H_ENCRYPTED_PAYLOAD}}*/"";
+        var max_pl = /*{{M_ENCRYPTED_PAYLOAD}}*/"";
+        var beth_pl = /*{{B_ENCRYPTED_PAYLOAD}}*/"";
+
+        const plMap = new Map([
+            ["Helen", helen_pl],
+            ["Max", max_pl],
+            ["Beth", beth_pl]
+        ]);
         
         var submitPass = document.getElementById('submitPass');
         var passEl = document.getElementById('pass');
+        var userEl = document.getElementById('userName');
         var invalidPassEl = document.getElementById('invalidPass');
         var trycatcherror = document.getElementById('trycatcherror');
         var successEl = document.getElementById('success');
@@ -163,12 +180,12 @@
         
         // Sanity checks
 
-        if (pl === "") {
-            submitPass.disabled = true;
-            passEl.disabled = true;
-            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
-            return;
-        }
+        //if (pl === "") {
+        //    submitPass.disabled = true;
+        //    passEl.disabled = true;
+        //    alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
+        //    return;
+        //}
 
         if (!isSecureContext) {
             document.querySelector("#passArea").style.display = "none";
@@ -213,6 +230,19 @@
         async function doSubmit(evt) {
             submitPass.disabled = true;
             passEl.disabled = true;
+
+            
+            // check the username here and switch hashes
+
+            var userName = userEl.value;
+            pl = plMap.get(userName);
+
+            if (pl === "") {
+                submitPass.disabled = true;
+                passEl.disabled = true;
+                alert("No page available for this user name :(");
+                return;
+            }
 
             let iv, ciphertext, key;
             
