@@ -51,14 +51,14 @@ def book_club_wrapped(name):
     if name in who_has_the_most_genres(book_array):
         winner.append(who_has_the_most_genres(book_array))
 
-    picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
+    picked_books = [x for x in book_array if x["picker"].strip() == name.strip()]
     # we need to filter dnfs out here
     highest_rated_book = max(book_array, key=lambda book: book["rating"][name])
     highest_rated_picked_book = max(
         picked_books, key=lambda book: book["rating"]["Average"]
     )
     genres = []
-    for genre in map(lambda x: x.genre, book_array):
+    for genre in map(lambda x: x["genre"], book_array):
         for split_genre in genre.split("/"):
             genres.append(split_genre)
 
