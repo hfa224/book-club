@@ -1,9 +1,11 @@
+""" Main flask app to serve book club site """
+
+import os
+from datetime import datetime
 from flask import Flask, render_template
 from jinja2 import Template
 from encrypt_flask_template import encrypt
-from read_data import read_book_data, read_book_isbns, who_has_the_most_genres
-import os
-from datetime import datetime
+from read_data import read_book_isbns, who_has_the_most_genres
 
 app = Flask(__name__)
 
@@ -12,7 +14,7 @@ app.config["FREEZER_RELATIVE_URLS"] = True
 
 @app.route("/")
 def home():
-    read_book_data()
+    """Serve up the home page"""
     book_array = read_book_isbns()
 
     current_book = max(
@@ -26,22 +28,25 @@ def home():
 
 @app.route("/book_club_about/")
 def book_club_about():
+    """Serve up the about page"""
     return render_template("book_club_about.html")
 
 
 # This is a noddy way of making the site able to be made static
 @app.route("/book_club_wrapped/")
 def wrapped():
+    """Serve up the wrapped page"""
     # create a list of tuples
-    tuple_list = [
+    members_list = [
         ("M_ENCRYPTED_PAYLOAD", book_club_wrapped("Max"), "max2024"),
         ("B_ENCRYPTED_PAYLOAD", book_club_wrapped("Beth"), "beth2024"),
         ("H_ENCRYPTED_PAYLOAD", book_club_wrapped("Helen"), "helen2024"),
     ]
-    return encrypt(tuple_list)
+    return encrypt(members_list)
 
 
 def book_club_wrapped(name):
+    """Generate book club wrapped page from template"""
     book_array = read_book_isbns()
     winner = []
     if name in who_has_the_most_genres(book_array):

@@ -1,3 +1,5 @@
+
+""" Uses flask freeze to generate static site files """
 from flask_frozen import Freezer
 from app import app
 
