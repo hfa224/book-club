@@ -32,7 +32,7 @@ def make_from_row(row):
         "picker": row[2],
         "date": row[3],
         "genre": row[7],
-        "cover_img_url": cover_img,
+        "cover_image_url": cover_img,
         "rating": rating,
     }
 
@@ -48,7 +48,7 @@ def get_book_image_url(isbn):
     if os.path.exists("static/" + local_img_url):
         return local_img_url
     try:
-        if requests.head(url=image_url + "?default=false", timeout=60).status_code != 404:
+        if requests.head(url=image_url + "?default=false", timeout=10).status_code != 404:
             return image_url
     except requests.exceptions.Timeout:
         print("Cover image request to open library timed out - using default img")
