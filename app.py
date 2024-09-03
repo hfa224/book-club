@@ -3,7 +3,6 @@
 import os
 from datetime import datetime
 from flask import Flask, render_template
-from jinja2 import Template
 from encrypt_flask_template import encrypt
 from read_data import read_book_isbns, who_has_the_most_genres
 
@@ -54,7 +53,7 @@ def book_club_wrapped(name):
 
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     # we need to filter dnfs out here
-    highest_rated_book = max(book_array, key=lambda book: book.rating[name] )
+    highest_rated_book = max(book_array, key=lambda book: book.rating[name])
     highest_rated_picked_book = max(
         picked_books, key=lambda book: book.rating["Average"]
     )

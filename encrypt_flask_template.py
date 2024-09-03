@@ -24,7 +24,8 @@ def encrypt(members_list):
         based on the key given for each member"""
 
     project_folder = os.path.dirname(os.path.abspath(__file__))
-    with open(file=os.path.join(project_folder, "templates/decryptTemplate.html"), encoding="utf8") as f:
+    with open(file=os.path.join(project_folder, "templates/decryptTemplate.html"),
+              encoding="utf8") as f:
         template_html = f.read()
 
     encrypted_doc = template_html

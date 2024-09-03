@@ -26,15 +26,15 @@ def make_from_row(row):
         )  # "https://covers.openlibrary.org/b/isbn/"+ row[9] + "-M.jpg"
         book_cover_urls[row[9]] = cover_img
 
-    return dict(
-        title=row[0],
-        author=row[1],
-        picker=row[2],
-        date=row[3],
-        genre=row[7],
-        cover_img_url=cover_img,
-        rating=rating,
-    )
+    return {
+        "title": row[0],
+        "author": row[1],
+        "picker": row[2],
+        "date": row[3],
+        "genre": row[7],
+        "cover_img_url": cover_img,
+        "rating": rating,
+    }
 
 
 def get_book_image_url(isbn):
@@ -49,8 +49,7 @@ def get_book_image_url(isbn):
         return local_img_url
     if requests.head(url=image_url + "?default=false", timeout=10).status_code != 404:
         return image_url
-    else:
-        return "images/book_covers/mystery_book.png"  # just a place holder....
+    return "images/book_covers/mystery_book.png"  # if no cover image, return mystery book image
 
 
 def read_book_isbns():
