@@ -47,8 +47,11 @@ def get_book_image_url(isbn):
 
     if os.path.exists("static/" + local_img_url):
         return local_img_url
-    if requests.head(url=image_url + "?default=false", timeout=10).status_code != 404:
-        return image_url
+    try:
+        if requests.head(url=image_url + "?default=false", timeout=10).status_code != 404:
+            return image_url
+    except requests.exceptions.Timeout:
+        print("Cover image request to open library timed out - using default img")
     return "images/book_covers/mystery_book.png"  # if no cover image, return mystery book image
 
 
