@@ -17,7 +17,7 @@ def home():
     book_array = read_book_isbns()
 
     current_book = max(
-        book_array, key=lambda book: datetime.strptime(book.date, "%m-%Y").date()
+        book_array, key=lambda book: datetime.strptime(book["date"], "%m-%Y").date()
     )
     book_array.remove(current_book)
     return render_template(
@@ -53,9 +53,9 @@ def book_club_wrapped(name):
 
     picked_books = [x for x in book_array if x.picker.strip() == name.strip()]
     # we need to filter dnfs out here
-    highest_rated_book = max(book_array, key=lambda book: book.rating[name])
+    highest_rated_book = max(book_array, key=lambda book: book["rating"][name])
     highest_rated_picked_book = max(
-        picked_books, key=lambda book: book.rating["Average"]
+        picked_books, key=lambda book: book["rating"]["Average"]
     )
     genres = []
     for genre in map(lambda x: x.genre, book_array):

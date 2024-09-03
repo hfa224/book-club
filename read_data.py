@@ -69,7 +69,7 @@ def read_book_isbns():
                 book_array.append(make_from_row(list(row)))
     sorted_books = sorted(
         book_array,
-        key=lambda x: datetime.strptime(x.date, "%m-%Y").date(),
+        key=lambda book_dict: datetime.strptime(book_dict["date"], "%m-%Y").date(),
         reverse=True,
     )
     return sorted_books
@@ -79,10 +79,11 @@ def who_has_the_most_genres(book_array):
     """From the book_array, find the picker who has the most diverse genre selection"""
     books_by_picker = {}
     for book in book_array:
-        if book.picker not in books_by_picker:
-            books_by_picker[book.picker] = set([])
-        for split_genre in book.genre.split("/"):
-            books_by_picker[book.picker].add(split_genre)
+        picker = book["picker"]
+        if picker not in books_by_picker:
+            books_by_picker[picker] = set([])
+        for split_genre in book["genre"].split("/"):
+            books_by_picker[picker].add(split_genre)
 
     genres_dict = dict((k, len(v)) for k, v in books_by_picker.items())
     winner = max(genres_dict, key=genres_dict.get)
