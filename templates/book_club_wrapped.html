@@ -27,7 +27,7 @@
   </div>
   <div class="box">
     <p class="text">The book you rated highest was {{highest_rated_book['title']}}</p>
-    {% set cover_img_url = highest_rated_book['cover_image_url'] %}
+    {% set cover_image_url = highest_rated_book['cover_image_url'] %}
     {% if 'http' in highest_rated_book['cover_image_url'] %}
     <img class="tag" src={{cover_image_url}}>
     {% else %}
@@ -37,7 +37,7 @@
   <div class="box">
     <p class="text">You've picked {{ picked_books|length }} books</p>
     {% for book in picked_books %}
-    {% set cover_img_url = book['cover_image_url'] %}
+    {% set cover_image_url = book['cover_image_url'] %}
     {% if 'http' in book['cover_image_url'] %}
     <img class="tag" src={{cover_image_url}}>
     {% else %}
@@ -47,7 +47,7 @@
   </div>
   <div class="box">
     <p class="text">The book you picked that was rated the highest was {{highest_rated_picked_book['title']}} </p>
-    {% set cover_img_url = highest_rated_picked_book['cover_image_url'] %}
+    {% set cover_image_url = highest_rated_picked_book['cover_image_url'] %}
     {% if 'http' in highest_rated_picked_book['cover_image_url'] %}
     <img class="tag" src={{cover_image_url}}>
     {% else %}
