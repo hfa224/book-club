@@ -30,8 +30,6 @@ def book_club_about():
     """Serve up the about page"""
     return render_template("book_club_about.html")
 
-
-# This is a noddy way of making the site able to be made static
 @app.route("/book_club_wrapped/")
 def wrapped():
     """Serve up the wrapped page"""
