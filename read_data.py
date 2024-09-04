@@ -3,8 +3,8 @@
 import csv
 from datetime import datetime
 import os
-import requests
 from typing import Dict
+import requests
 
 
 # cache for book cover urls to avoid repeatedly querying open covers
