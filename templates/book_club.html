@@ -32,7 +32,7 @@
 	{% else %}
 	<img class="aside-image" src={{ url_for('static', filename=book['cover_image_url']) }}></img>
 	{% endif %}
-<p>
+</p>
 <div class="image-aside">
 	<p>
 		<b>Title: </b>{{ book['title'] }}<br>
@@ -55,13 +55,13 @@
 		/5
 	</p>
 </div>
+<p>
 <details>
 	<summary>See individual ratings...</summary>
 	<p>Max's rating was {{ book['rating']['Max']}} / 5</p>
 	<p>Helen's rating was {{ book['rating']['Helen']}} / 5</p>
 	<p>Bethany's rating was {{ book['rating']['Beth']}} / 5</p>
 </details>
-</p>
 </p>
 {% endfor %}
 {% endblock %}
