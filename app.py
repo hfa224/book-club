@@ -30,6 +30,7 @@ def book_club_about():
     """Serve up the about page"""
     return render_template("book_club_about.html")
 
+
 @app.route("/book_club_wrapped/")
 def wrapped():
     """Serve up the wrapped page"""
@@ -51,7 +52,10 @@ def book_club_wrapped(name):
 
     picked_books = [x for x in book_array if x["picker"].strip() == name.strip()]
     # we need to filter dnfs out here
-    highest_rated_book = max(book_array, key=lambda book: book["rating"][name] if book["rating"][name] != "dnf" else "0")
+    highest_rated_book = max(
+        book_array,
+        key=lambda book: book["rating"][name] if book["rating"][name] != "dnf" else "0",
+    )
     highest_rated_picked_book = max(
         picked_books, key=lambda book: book["rating"]["Average"]
     )
