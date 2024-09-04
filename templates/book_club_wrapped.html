@@ -36,6 +36,9 @@
   </div>
   <div class="box">
     <p class="text">You've picked {{ picked_books|length }} books</p>
+    </div>
+    
+  <div class="box">
     {% for book in picked_books %}
     {% set cover_image_url = book['cover_image_url'] %}
     {% if 'http' in book['cover_image_url'] %}

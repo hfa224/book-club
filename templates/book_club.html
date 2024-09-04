@@ -27,6 +27,12 @@
 {% for book in book_array %}
 <p>
 	{% set index = book['rating']['Average'] | int() %}
+	{% if 'http' in book['cover_image_url'] %}
+	<img class="aside-image" src={{ book['cover_image_url'] }}>
+	{% else %}
+	<img class="aside-image" src={{ url_for('static', filename=book['cover_image_url']) }}></img>
+	{% endif %}
+<p>
 <div class="image-aside">
 	<p>
 		<b>Title: </b>{{ book['title'] }}<br>
@@ -49,12 +55,6 @@
 		/5
 	</p>
 </div>
-{% if 'http' in book['cover_image_url'] %}
-<img class="aside-image" src={{ book['cover_image_url'] }}>
-{% else %}
-<img class="aside-image" src={{ url_for('static', filename=book['cover_image_url']) }}></img>
-{% endif %}
-<p>
 <details>
 	<summary>See individual ratings...</summary>
 	<p>Max's rating was {{ book['rating']['Max']}} / 5</p>
