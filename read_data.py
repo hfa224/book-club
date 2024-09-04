@@ -4,11 +4,12 @@ import csv
 from datetime import datetime
 import os
 import requests
+from typing import Dict
 
 
 # cache for book cover urls to avoid repeatedly querying open covers
 # to check if it has the book cover we want
-book_cover_urls = {}
+book_cover_urls: Dict[str, str] = {}
 
 
 def make_from_row(row):
