@@ -22,9 +22,7 @@ def make_from_row(row):
         # print("found " + row[9] + " in cache")
         cover_img = book_cover_urls[row[9]]
     else:
-        cover_img = get_book_image_url(
-            row[9]
-        )  # "https://covers.openlibrary.org/b/isbn/"+ row[9] + "-M.jpg"
+        cover_img = get_book_image_url(row[9])
         book_cover_urls[row[9]] = cover_img
 
     return {
@@ -41,18 +39,12 @@ def make_from_row(row):
 def get_book_image_url(isbn):
     """Get the book image url - first checks for local image, if unavailable will query openlibrary
     Finally will display a ??? image"""
-    image_url = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
     local_img_url = (
         "images/book_covers/" + isbn + ".png"
     )  # book cover images should by pngs named after the isbn
 
     if os.path.exists("static/" + local_img_url):
         return local_img_url
-    try:
-        if requests.head(url=image_url + "?default=false", timeout=10).status_code != 404:
-            return image_url
-    except requests.exceptions.Timeout:
-        print("Cover image request to open library timed out - using default img")
     return "images/book_covers/mystery_book.png"  # if no cover image, return mystery book image
 
 
