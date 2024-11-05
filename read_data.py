@@ -13,7 +13,6 @@ book_cover_urls: Dict[str, str] = {}
 
 def make_from_row(row):
     """Create a book dictionary from a row of the csv file"""
-
     rating = {"Helen": row[4], "Max": row[5], "Beth": row[6], "Average": row[8]}
 
     # check the cache first for this isbn
@@ -57,9 +56,9 @@ def read_book_isbns():
         csv_reader = csv.reader(csv_file, delimiter=",")
         line_count = 0
         for row in csv_reader:
-            if line_count == 0:
+            if line_count == 0: # ignore the header row
                 line_count += 1
-            else:
+            elif len(row) > 0: # only add row if not empty
                 line_count += 1
                 book_array.append(make_from_row(list(row)))
     sorted_books = sorted(
