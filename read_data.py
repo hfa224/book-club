@@ -1,4 +1,4 @@
-""" Contains methods to read book data from csv file"""
+"""Contains methods to read book data from csv file"""
 
 import csv
 from datetime import datetime
@@ -11,7 +11,8 @@ from typing import Dict, List
 # to check if it has the book cover we want
 book_cover_urls: Dict[str, str] = {}
 
-picker_order: List = ['Max', 'Beth', 'Helen']
+picker_order: List = ["Max", "Beth", "Helen"]
+
 
 def make_from_row(row):
     """Create a book dictionary from a row of the csv file"""
@@ -58,9 +59,9 @@ def read_book_isbns():
         csv_reader = csv.reader(csv_file, delimiter=",")
         line_count = 0
         for row in csv_reader:
-            if line_count == 0: # ignore the header row
+            if line_count == 0:  # ignore the header row
                 line_count += 1
-            elif len(row) > 0: # only add row if not empty
+            elif len(row) > 0:  # only add row if not empty
                 line_count += 1
                 book_array.append(make_from_row(list(row)))
     sorted_books = sorted(
@@ -90,10 +91,11 @@ def who_has_the_most_genres(book_array):
         + " genres!",
     )
 
+
 def generate_next_pick_message(current_book):
-    """ Generate the message to show who picks the next book and when """
+    """Generate the message to show who picks the next book and when"""
     # we need to know who picked the last book and the month it was picked
-    picker = current_book['picker']
+    picker = current_book["picker"]
     date = datetime.strptime(current_book["date"], "%m-%Y").date()
 
     current_month_index = datetime.now().date().month
@@ -105,4 +107,10 @@ def generate_next_pick_message(current_book):
 
     index = (picker_order.index(picker) + 1) % 3
 
-    return ("The next book will be picked by " + picker_order[index] + " in " + calendar.month_name[month_index] + ".")
+    return (
+        "The next book will be picked by "
+        + picker_order[index]
+        + " in "
+        + calendar.month_name[month_index]
+        + "."
+    )

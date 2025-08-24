@@ -1,10 +1,14 @@
-""" Main flask app to serve book club site """
+"""Main flask app to serve book club site"""
 
 import os
 from datetime import datetime
 from flask import Flask, render_template
 from encrypt_flask_template import encrypt
-from read_data import read_book_isbns, who_has_the_most_genres, generate_next_pick_message
+from read_data import (
+    read_book_isbns,
+    who_has_the_most_genres,
+    generate_next_pick_message,
+)
 
 app = Flask(__name__)
 
@@ -23,8 +27,12 @@ def home():
 
     next_pick_message = generate_next_pick_message(current_book)
     return render_template(
-        "book_club.html", book_array=book_array, current_book=current_book, next_pick_message=next_pick_message
+        "book_club.html",
+        book_array=book_array,
+        current_book=current_book,
+        next_pick_message=next_pick_message,
     )
+
 
 @app.route("/book_club_about/")
 def book_club_about():
