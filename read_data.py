@@ -3,13 +3,15 @@
 import csv
 from datetime import datetime
 import os
-from typing import Dict
+import calendar
+from typing import Dict, List
 
 
 # cache for book cover urls to avoid repeatedly querying open covers
 # to check if it has the book cover we want
 book_cover_urls: Dict[str, str] = {}
 
+picker_order: List = ['Max', 'Beth', 'Helen']
 
 def make_from_row(row):
     """Create a book dictionary from a row of the csv file"""
@@ -87,3 +89,20 @@ def who_has_the_most_genres(book_array):
         + str(genres_dict.get(winner))
         + " genres!",
     )
+
+def generate_next_pick_message(current_book):
+    """ Generate the message to show who picks the next book and when """
+    # we need to know who picked the last book and the month it was picked
+    picker = current_book['picker']
+    date = datetime.strptime(current_book["date"], "%m-%Y").date()
+
+    current_month_index = datetime.now().date().month
+    month_index = (date.month + 1) % 12
+    # if we've run over (i.e. we've skipped a month), just say we'll pick in the current month
+    print(month_index)
+    print(current_month_index)
+    month_index = max(month_index, current_month_index)
+
+    index = (picker_order.index(picker) + 1) % 3
+
+    return ("The next book will be picked by " + picker_order[index] + " in " + calendar.month_name[month_index] + ".")

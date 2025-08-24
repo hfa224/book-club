@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 from flask import Flask, render_template
 from encrypt_flask_template import encrypt
-from read_data import read_book_isbns, who_has_the_most_genres
+from read_data import read_book_isbns, who_has_the_most_genres, generate_next_pick_message
 
 app = Flask(__name__)
 
@@ -20,10 +20,11 @@ def home():
         book_array, key=lambda book: datetime.strptime(book["date"], "%m-%Y").date()
     )
     book_array.remove(current_book)
-    return render_template(
-        "book_club.html", book_array=book_array, current_book=current_book
-    )
 
+    next_pick_message = generate_next_pick_message(current_book)
+    return render_template(
+        "book_club.html", book_array=book_array, current_book=current_book, next_pick_message=next_pick_message
+    )
 
 @app.route("/book_club_about/")
 def book_club_about():
