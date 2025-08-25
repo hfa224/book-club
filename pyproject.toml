@@ -1,8 +1,8 @@
 [project]
-name = "hfa-personal-site"
+name = "book-club"
 version = "0.1"
-description = "Helen's personal static site"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "Site for Berlin Beer and Book Club"
+authors = [{ name = "Helen Adams", email = "helenffionadams@gmail.com" }]
 requires-python = "~=3.9"
 readme = "README.md"
 dependencies = [
@@ -15,3 +15,4 @@ dependencies = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+package-mode = false

@@ -1,0 +1,129 @@
+/* centre to header logo */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/* display the "about" button to the right */
+.right {
+    float: right;
+}
+
+/* set the size of the nav button */
+.nav-button {
+    width: 100px;
+    height: auto;
+}
+
+/* set the size of the rating images */
+.rating-image {
+    width: 20px;
+    height: auto;
+}
+
+/* set the size of the suprise button */
+.suprise-button {
+    width: 50px;
+    height: auto;
+}
+
+/* set the size of the header logo */
+.logo-button {
+    width: 300px;
+    height: auto;
+}
+
+/* use to rotate images slightly on hover */
+.img-rotate {
+    transform: rotate(0deg);
+    box-shadow: 0.5em 0.5em 0.5em #ccc;
+}
+
+.img-rotate:hover {
+    transform: rotate(-12deg);
+    box-shadow: 0.5em 0.5em 0.5em #ccc;
+}
+
+/* add footer for credits */
+
+.footer {
+    text-align: center; 
+    margin-top: 2rem; 
+    margin-bottom: 2rem; 
+    height: 50px;
+    font-size: .75rem;
+}
+
+/* used to change the suprise button image on mouse-over */
+.image-swap img:last-child {
+    display: none
+}
+
+.image-swap:hover img:first-child {
+    display: none
+}
+
+.image-swap:hover img:last-child {
+    display: inline-block
+}
+
+/* used to set sprakly background image for current book */
+.bgimg {
+    background-image: url('../images/giphy.gif');
+    background-size: 300px;
+    height: 300px;
+    background-repeat: repeat-x;
+}
+
+/* version of magick css aside designed to put text next to images */
+.image-aside {
+    float: right;
+    /* 2 */
+    clear: right;
+    /* 3 */
+    width: 60%;
+    /* 4 */
+    margin: 1rem 1rem 1rem 1rem;
+    /* 5 */
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    /* 5 */
+    border-left: 3px solid var(#000);
+    /* 5 */
+    line-height: 1.3;
+    /* 6 */
+}
+
+.aside-image {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    height: 258px
+    /* 5 */
+}
+
+/* Prevent double top margins */
+.image-aside h1,
+.image-aside h2,
+.image-aside h3,
+.image-aside h4 {
+    margin-top: 0;
+}
+
+
+/* On mobile devices, display image aside below image */
+@media (max-width: 600px) {
+    /* version of magick css aside designed to put text next to images */
+    .aside-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    /* version of magick css aside designed to put text next to images */
+    .image-aside {
+        width: 100%;
+        margin: 1rem 1rem 1rem 1rem;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        line-height: 1.3;
+    }
+}
