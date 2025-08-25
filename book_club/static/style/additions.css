@@ -31,7 +31,7 @@
 
 /* set the size of the header logo */
 .logo-button {
-    width: 300px;
+    width: 200px;
     height: auto;
 }
 
@@ -69,7 +69,7 @@
     display: inline-block
 }
 
-/* used to set sprakly background image for current book */
+/* used to set sparkly background image for current book */
 .bgimg {
     background-image: url('../images/giphy.gif');
     background-size: 300px;
