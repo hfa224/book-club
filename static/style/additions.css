@@ -80,19 +80,12 @@
 /* version of magick css aside designed to put text next to images */
 .image-aside {
     float: right;
-    /* 2 */
     clear: right;
-    /* 3 */
     width: 60%;
-    /* 4 */
     margin: 1rem 1rem 1rem 1rem;
-    /* 5 */
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    /* 5 */
     border-left: 3px solid var(#000);
-    /* 5 */
     line-height: 1.3;
-    /* 6 */
 }
 
 .aside-image {
@@ -122,8 +115,10 @@
     /* version of magick css aside designed to put text next to images */
     .image-aside {
         width: 100%;
-        margin: 1rem 1rem 1rem 1rem;
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-        line-height: 1.3;
+        display: block;
+        margin: 1rem 1rem 1rem 3rem;
+        padding: 0.5rem 0.5rem 0.5rem 2rem;
+        border-left: 3px solid var(--fg);
+        line-height: 1.8; /* 6 */
     }
 }
