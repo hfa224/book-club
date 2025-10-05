@@ -39,6 +39,11 @@ def book_club_about():
     """Serve up the about page"""
     return render_template("book_club_about.html")
 
+@app.route("/october_challenge/")
+def october_challenge():
+    """Serve up the october challenge page"""
+    return render_template("october_challenge.html")
+
 
 @app.route("/book_club_wrapped/")
 def wrapped():
