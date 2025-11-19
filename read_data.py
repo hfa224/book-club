@@ -91,6 +91,20 @@ def who_has_the_most_genres(book_array):
         + " genres!",
     )
 
+def who_has_the_highest_rated(book_array):
+    """Find the picker who picked the highest rated book"""
+
+    max_rating_book = max(book_array, key=lambda book: book["rating"]["Average"])
+
+
+    winner = max_rating_book["picker"]
+    return (
+        winner,
+        "you have the highest rated book, "
+        + str(max_rating_book["title"])
+        + " with a rating of " + str(max_rating_book["rating"]["Average"])
+    )
+
 
 def generate_next_pick_message(current_book):
     """Generate the message to show who picks the next book and when"""
