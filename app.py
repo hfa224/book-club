@@ -55,6 +55,10 @@ def wrapped():
 def book_club_wrapped(name):
     """Generate book club wrapped page from template"""
     book_array = read_book_isbns()
+
+    # filter for this year
+    book_array = [x for x in book_array if "2025" in x["date"]]
+
     winner = []
     if name in who_has_the_most_genres(book_array):
         winner.append(who_has_the_most_genres(book_array))
