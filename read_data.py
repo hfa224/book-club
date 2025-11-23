@@ -41,12 +41,12 @@ def get_book_image_url(isbn):
     """Get the book image url - first checks for local image, if unavailable will query openlibrary
     Finally will display a ??? image"""
     local_img_url = (
-        "images/book_covers/" + isbn + ".png"
-    )  # book cover images should by pngs named after the isbn
+        "images/book_covers/" + isbn + ".jpg"
+    )  # book cover images should by jpgs named after the isbn
 
     if os.path.exists("static/" + local_img_url):
         return local_img_url
-    return "images/book_covers/mystery_book.png"  # if no cover image, return mystery book image
+    return "images/book_covers/mystery_book.jpg"  # if no cover image, return mystery book image
 
 
 def read_book_isbns():
@@ -89,6 +89,20 @@ def who_has_the_most_genres(book_array):
         "you have the most diverse amount of genres with "
         + str(genres_dict.get(winner))
         + " genres!",
+    )
+
+def who_has_the_highest_rated(book_array):
+    """Find the picker who picked the highest rated book"""
+
+    max_rating_book = max(book_array, key=lambda book: book["rating"]["Average"])
+
+
+    winner = max_rating_book["picker"]
+    return (
+        winner,
+        "you have the highest rated book, "
+        + str(max_rating_book["title"])
+        + " with a rating of " + str(max_rating_book["rating"]["Average"])
     )
 
 

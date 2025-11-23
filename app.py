@@ -8,6 +8,7 @@ from read_data import (
     read_book_isbns,
     who_has_the_most_genres,
     generate_next_pick_message,
+    who_has_the_highest_rated,
 )
 
 app = Flask(__name__)
@@ -45,9 +46,9 @@ def wrapped():
     """Serve up the wrapped page"""
     # create a list of tuples
     members_list = [
-        ("M_ENCRYPTED_PAYLOAD", book_club_wrapped("Max"), "max2024"),
-        ("B_ENCRYPTED_PAYLOAD", book_club_wrapped("Beth"), "beth2024"),
-        ("H_ENCRYPTED_PAYLOAD", book_club_wrapped("Helen"), "helen2024"),
+        ("M_ENCRYPTED_PAYLOAD", book_club_wrapped("Max"), "max2025"),
+        ("B_ENCRYPTED_PAYLOAD", book_club_wrapped("Beth"), "beth2025"),
+        ("H_ENCRYPTED_PAYLOAD", book_club_wrapped("Helen"), "helen2025"),
     ]
     return encrypt(members_list)
 
@@ -55,9 +56,14 @@ def wrapped():
 def book_club_wrapped(name):
     """Generate book club wrapped page from template"""
     book_array = read_book_isbns()
+
+    # filter for this year
+    book_array = [x for x in book_array if "2025" in x["date"]]
+
     winner = []
     if name in who_has_the_most_genres(book_array):
         winner.append(who_has_the_most_genres(book_array))
+        winner.append(who_has_the_highest_rated(book_array))
 
     picked_books = [x for x in book_array if x["picker"].strip() == name.strip()]
     # we need to filter dnfs out here
