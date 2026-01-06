@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 import os
 import calendar
-from typing import Dict, List
+from typing import List
 import re
 
 # remember the picker order
@@ -28,7 +28,8 @@ def make_from_row(row):
 
 
 def get_book_image_url(title, author):
-    """Get the book image url - first checks for local image, if not present will display a ??? image"""
+    """Create the book cover img path using the title and author. If not available, 
+    return mystery book url"""
 
     title_and_author = title + "_" + author
     title_and_author_underscore = re.sub(' ', '_', title_and_author)
@@ -46,9 +47,9 @@ def get_book_image_url(title, author):
     return "images/book_covers/mystery_book.jpg"  # if no cover image, return mystery book image
 
 
-def read_book_isbns():
-    """Get the book image url - first checks for local image, if unavailable will query openlibrary
-    Finally will display a ??? image"""
+def read_books():
+    """Read the book information from the csv file and return an array of books,
+    sorted by te date they were picked"""
     book_array = []
     with open(
         file="static/data/book_data.csv", encoding="UTF-8"
@@ -92,8 +93,6 @@ def who_has_the_highest_rated(book_array):
     """Find the picker who picked the highest rated book"""
 
     max_rating_book = max(book_array, key=lambda book: book["rating"]["Average"])
-
-
     winner = max_rating_book["picker"]
     return (
         winner,
