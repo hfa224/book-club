@@ -4,27 +4,17 @@ import csv
 from datetime import datetime
 import os
 import calendar
-from typing import Dict, List
+from typing import List
+import re
 
-
-# cache for book cover urls to avoid repeatedly querying open covers
-# to check if it has the book cover we want
-book_cover_urls: Dict[str, str] = {}
-
+# remember the picker order
 picker_order: List = ["Max", "Beth", "Helen"]
-
 
 def make_from_row(row):
     """Create a book dictionary from a row of the csv file"""
     rating = {"Helen": row[4], "Max": row[5], "Beth": row[6], "Average": row[8]}
 
-    # check the cache first for this isbn
-    if row[9] in book_cover_urls:
-        # print("found " + row[9] + " in cache")
-        cover_img = book_cover_urls[row[9]]
-    else:
-        cover_img = get_book_image_url(row[9])
-        book_cover_urls[row[9]] = cover_img
+    cover_img = get_book_image_url(row[0], row[1])
 
     return {
         "title": row[0],
@@ -37,24 +27,32 @@ def make_from_row(row):
     }
 
 
-def get_book_image_url(isbn):
-    """Get the book image url - first checks for local image, if unavailable will query openlibrary
-    Finally will display a ??? image"""
+def get_book_image_url(title, author):
+    """Create the book cover img path using the title and author. If not available, 
+    return mystery book url"""
+
+    title_and_author = title + "_" + author
+    title_and_author_underscore = re.sub(' ', '_', title_and_author)
+    url_string_sanitised = re.sub(r'\W+', '', title_and_author_underscore).lower()
+
+
     local_img_url = (
-        "images/book_covers/" + isbn + ".jpg"
+        "images/book_covers/" + url_string_sanitised + ".jpg"
     )  # book cover images should by jpgs named after the isbn
+
+    print(url_string_sanitised)
 
     if os.path.exists("static/" + local_img_url):
         return local_img_url
     return "images/book_covers/mystery_book.jpg"  # if no cover image, return mystery book image
 
 
-def read_book_isbns():
-    """Get the book image url - first checks for local image, if unavailable will query openlibrary
-    Finally will display a ??? image"""
+def read_books():
+    """Read the book information from the csv file and return an array of books,
+    sorted by te date they were picked"""
     book_array = []
     with open(
-        file="static/data/Berlin Beer & Book Club.csv", encoding="UTF-8"
+        file="static/data/book_data.csv", encoding="UTF-8"
     ) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=",")
         line_count = 0
@@ -95,8 +93,6 @@ def who_has_the_highest_rated(book_array):
     """Find the picker who picked the highest rated book"""
 
     max_rating_book = max(book_array, key=lambda book: book["rating"]["Average"])
-
-
     winner = max_rating_book["picker"]
     return (
         winner,

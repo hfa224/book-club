@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import Flask, render_template
 from encrypt_flask_template import encrypt
 from read_data import (
-    read_book_isbns,
+    read_books,
     who_has_the_most_genres,
     generate_next_pick_message,
     who_has_the_highest_rated,
@@ -19,7 +19,7 @@ app.config["FREEZER_RELATIVE_URLS"] = True
 @app.route("/")
 def home():
     """Serve up the home page"""
-    book_array = read_book_isbns()
+    book_array = read_books()
 
     current_book = max(
         book_array, key=lambda book: datetime.strptime(book["date"], "%m-%Y").date()
@@ -55,7 +55,7 @@ def wrapped():
 
 def book_club_wrapped(name):
     """Generate book club wrapped page from template"""
-    book_array = read_book_isbns()
+    book_array = read_books()
 
     # filter for this year
     book_array = [x for x in book_array if "2025" in x["date"]]
