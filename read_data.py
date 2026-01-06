@@ -5,26 +5,16 @@ from datetime import datetime
 import os
 import calendar
 from typing import Dict, List
+import re
 
-
-# cache for book cover urls to avoid repeatedly querying open covers
-# to check if it has the book cover we want
-book_cover_urls: Dict[str, str] = {}
-
+# remember the picker order
 picker_order: List = ["Max", "Beth", "Helen"]
-
 
 def make_from_row(row):
     """Create a book dictionary from a row of the csv file"""
     rating = {"Helen": row[4], "Max": row[5], "Beth": row[6], "Average": row[8]}
 
-    # check the cache first for this isbn
-    if row[9] in book_cover_urls:
-        # print("found " + row[9] + " in cache")
-        cover_img = book_cover_urls[row[9]]
-    else:
-        cover_img = get_book_image_url(row[9])
-        book_cover_urls[row[9]] = cover_img
+    cover_img = get_book_image_url(row[0], row[1])
 
     return {
         "title": row[0],
@@ -37,12 +27,19 @@ def make_from_row(row):
     }
 
 
-def get_book_image_url(isbn):
-    """Get the book image url - first checks for local image, if unavailable will query openlibrary
-    Finally will display a ??? image"""
+def get_book_image_url(title, author):
+    """Get the book image url - first checks for local image, if not present will display a ??? image"""
+
+    title_and_author = title + "_" + author
+    title_and_author_underscore = re.sub(' ', '_', title_and_author)
+    url_string_sanitised = re.sub(r'\W+', '', title_and_author_underscore).lower()
+
+
     local_img_url = (
-        "images/book_covers/" + isbn + ".jpg"
+        "images/book_covers/" + url_string_sanitised + ".jpg"
     )  # book cover images should by jpgs named after the isbn
+
+    print(url_string_sanitised)
 
     if os.path.exists("static/" + local_img_url):
         return local_img_url
@@ -54,7 +51,7 @@ def read_book_isbns():
     Finally will display a ??? image"""
     book_array = []
     with open(
-        file="static/data/Berlin Beer & Book Club.csv", encoding="UTF-8"
+        file="static/data/book_data.csv", encoding="UTF-8"
     ) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=",")
         line_count = 0
