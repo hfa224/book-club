@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<img class="center" style="width:200; height:auto;" src={{ url_for('static',
-	filename="images/site_images/current_book.png" ) }}></img>
+<h2>Current Book</h2>
 <div class="bgimg">
 	<img class="aside-image" src={{ url_for('static', filename=current_book['cover_image_url']) }}></img>
 	<div class="image-aside">
