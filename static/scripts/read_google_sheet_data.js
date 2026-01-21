@@ -10,7 +10,7 @@ function dateParse(dateString) {
   const month_year = dateString.split("-");
   console.log(month_year[0])
   console.log(month_year[1])
-  return new Date(parseInt(month_year[1]), parseInt(month_year[0])-1)
+  return new Date(parseInt(month_year[1]), parseInt(month_year[0]) - 1)
 }
 
 // init Isotope
@@ -25,7 +25,8 @@ function initIsotope() {
       title: '.title',
       author: '.author',
       genre: '.genre',
-      year: '.year parseInt',
+      year: '.year',
+      date: '.date',
       average: '.average parseFloat',
       picker: '[data-category]'
     }
@@ -60,7 +61,7 @@ function initIsotope() {
 // Construct the URL for Google Sheets API v4
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${apiKey}`;
 
-const img_url = 'https://berlinbeerbook.club/static/images/book_covers/'
+const img_url = 'static/images/book_covers/'
 
 async function fetchGoogleSheetData() {
   try {
@@ -108,33 +109,31 @@ async function fetchGoogleSheetData() {
         "year": row[2],
         "picker": row[3],
         "date": dateParse(row[4]),
+        "allRatings": {
+          "Helen": row[5],
+          "Max": row[6],
+          "Beth": row[7]
+        },
         "genre": row[8],
         "average": row[9]
       }
 
       listOfBooks[i] = bookMap;
 
-      const ratingsMap = {
-        "Helen": row[5],
-        "Max": row[6],
-        "Beth": row[7]
-      };
-
-      listOfRatings[i] = ratingsMap;
-
     }
 
-    // TODO sort ratings
-    // listOfBooks.sort(function(a, b) { 
-    //   return a["date"] - b["date"];
-    // })
+    // Sort books from most recent to least recent
+    listOfBooks.sort(function (a, b) {
+      return b["date"] - a["date"];
+    })
+    // Get the current book
+    var currentBook = listOfBooks.shift();
+
 
     // Loop through the rows (starting from row 1 to skip headers)
-    for (let i = 1; i < listOfBooks.length; i++) {
+    for (let i = 0; i < listOfBooks.length; i++) {
 
       const bookMap = listOfBooks[i];
-      const ratingsMap = listOfRatings[i];
-
 
       const book_div = document.createElement("div");
       const book_cover = document.createElement("div");
@@ -149,6 +148,7 @@ async function fetchGoogleSheetData() {
       book_div.setAttribute("class", "book-item " + bookMap["picker"]);
       book_div.setAttribute("data-category", bookMap["picker"]);
 
+      //src={{ url_for('static', filename=current_book['cover_image_url']) }}
       //https://berlinbeerbook.club/static/images/book_covers/vampire_blood_trilogy_darren_shan.jpg
       var url_title = bookMap["title"].trim().replaceAll(" ", "_").replace(/\W+/g, "").toLowerCase();
       var url_author = bookMap["author"].trim().replaceAll(" ", "_").replace(/\W+/g, "").toLowerCase();
@@ -167,19 +167,21 @@ async function fetchGoogleSheetData() {
           const month = value.toLocaleString('default', { month: 'short' });
           const year = value.toLocaleString('default', { year: 'numeric' });
           title_p.innerText = month + " " + year
+        } else if (key == "allRatings") {
+          //skip
+          continue;
         } else {
           title_p.innerText = value;
         }
         book_info.appendChild(title_p)
       }
 
-      for (const [key, value] of Object.entries(ratingsMap)) {
+      for (const [key, value] of Object.entries(bookMap["allRatings"])) {
         const title_p = document.createElement("p");
-        //title_p.setAttribute("class", key);
         if (value != "dnf") {
-        title_p.innerText = key + ": " + ratingMap[Math.round(value)];
+          title_p.innerText = key + ": " + ratingMap[Math.round(value)];
         } else {
-        title_p.innerText = key + ": " + ratingMap[Math.round("dnf")];
+          title_p.innerText = key + ": " + ratingMap[Math.round("dnf")];
         }
         book_info.appendChild(title_p)
       }
