@@ -12,6 +12,14 @@ body {
     main {
         margin: 0px;
     }
+
+    .book-item {
+      width: 100%;
+      /*border: 1px solid black;*/
+      display: grid;
+      grid-template-rows: 320px;
+      grid-template-columns: 50% auto;
+    }
 }
 
 main {
@@ -66,7 +74,6 @@ main {
 }
 
 .title {
-  text-align: right;
   height: 12px;
   font-weight: 600;
   font-size: 15px;
@@ -74,7 +81,6 @@ main {
 }
 
 .author {
-  text-align: right;
   font-weight: 200;
   font-size: 15px;
   line-height: 80%;
