@@ -1,0 +1,62 @@
+<head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/read_google_sheet_data.js') }}"></script>
+
+</head>
+
+<body>
+    <header>
+        <img src="https://berlinbeerbook.club/static/images/site_images/BBandBC-2.png">
+    </header>
+    <nav>
+    </nav>
+    <main>
+        <h1>Books - filtering &amp; sorting</h1>
+        <h2>Picker</h2>
+        <div id="filters" class="button-group"> <button class="button is-checked" data-filter="*">show all</button>
+            <button class="button" data-filter=".Helen">Helen</button>
+            <button class="button" data-filter=".Beth">Beth</button>
+            <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
+            <button class="button" data-filter=":not(.Helen)">not Helen</button>
+            <button class="button" data-filter=".Max:not(.Beth)">max but not beth</button>
+            <button class="button" data-filter="ratingGreaterThan4">rating > 4</button>
+            <button class="button" data-filter="ium">name ends with &ndash;ium</button>
+        </div>
+
+        <h2>Sort</h2>
+        <div id="sorts" class="button-group"> <button class="button is-checked" data-sort-by="original-order">original
+                order</button>
+            <button class="button" data-sort-by="title">Title</button>
+            <button class="button" data-sort-by="author">Author</button>
+            <!--button class="button" data-sort-by="year">Year</button -->
+            <!--button class="button" data-sort-by="date-picked">Date picked</button-->
+            <button class="button" data-sort-by="genre">Genre</button>
+            <button class="button" data-sort-by="average">Rating</button>
+        </div>
+
+        <div class="book-container">
+            <!--div class="current-book">
+        <div class="cover"><!--img src="https://berlinbeerbook.club/static/images/book_covers/rebecca_daphne_du_maurier.jpg">
+          </div>
+        <div class="book-info"><b>Rebecca</b><br>
+          Daphne du Maurier<br>
+          <i>Currently reading</i>
+          </div>
+        <div class="book-info">Genre: Gothic fantasy / mystery<br>
+          Chosen by: Beth on 01-2026
+          </div>
+        <div class="book-info">
+          Rating: 🍺🍺🍺🍺🍺/5<br>
+          Beth: 🌟<br>
+          Helen: 😊<br>
+          Max: 😐<br>
+          </div>
+      </div-->
+        </div>
+    </main>
+</body>

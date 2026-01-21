@@ -17,6 +17,13 @@ app.config["FREEZER_RELATIVE_URLS"] = True
 
 
 @app.route("/")
+def index():
+    """Serve up the home page"""
+    return render_template(
+        "book_club_index.html"
+    )
+
+@app.route("/home")
 def home():
     """Serve up the home page"""
     book_array = read_books()
