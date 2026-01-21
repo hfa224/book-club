@@ -92,7 +92,7 @@ async function fetchGoogleSheetData() {
       3: "😐",
       2: "😞",
       1: "😖",
-      dnf: "🚫"
+      "dnf": "🚫"
     };
 
     listOfBooks = []
@@ -124,9 +124,10 @@ async function fetchGoogleSheetData() {
 
     }
 
-    listOfBooks.sort(function(a, b) { 
-      return a["date"] - b["date"];
-    })
+    // TODO sort ratings
+    // listOfBooks.sort(function(a, b) { 
+    //   return a["date"] - b["date"];
+    // })
 
     // Loop through the rows (starting from row 1 to skip headers)
     for (let i = 1; i < listOfBooks.length; i++) {
@@ -175,7 +176,11 @@ async function fetchGoogleSheetData() {
       for (const [key, value] of Object.entries(ratingsMap)) {
         const title_p = document.createElement("p");
         //title_p.setAttribute("class", key);
+        if (value != "dnf") {
         title_p.innerText = key + ": " + ratingMap[Math.round(value)];
+        } else {
+        title_p.innerText = key + ": " + ratingMap[Math.round("dnf")];
+        }
         book_info.appendChild(title_p)
       }
 
