@@ -136,17 +136,18 @@ async function fetchGoogleSheetData() {
       const bookMap = listOfBooks[i];
 
       const book_div = document.createElement("div");
+      
+      // construct the book div
+      book_div.setAttribute("class", "book-item " + bookMap["picker"]);
+      book_div.setAttribute("data-category", bookMap["picker"]);
+
+
       const book_cover = document.createElement("div");
       book_cover.setAttribute("class", "book-cover");
       const book_info = document.createElement("div");
       book_info.setAttribute("class", "book-info");
-      book_div.appendChild(book_cover);
       book_div.appendChild(book_info);
-
-
-      // construct the book div
-      book_div.setAttribute("class", "book-item " + bookMap["picker"]);
-      book_div.setAttribute("data-category", bookMap["picker"]);
+      book_div.appendChild(book_cover);
 
       //src={{ url_for('static', filename=current_book['cover_image_url']) }}
       //https://berlinbeerbook.club/static/images/book_covers/vampire_blood_trilogy_darren_shan.jpg

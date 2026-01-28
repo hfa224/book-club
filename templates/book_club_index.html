@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
@@ -6,8 +8,8 @@
 
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/read_google_sheet_data.js') }}"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
 
 </head>
 
@@ -36,14 +38,16 @@
     <main>
         <h2>Previous books...</h2>
         <h3>Filter</h3>
-        <div id="filters" class="button-group"> <button class="button is-checked" data-filter="*">show all</button>
+        <div id="filters" class="button-group">
+            <button class="button is-checked" data-filter="*">show all</button>
             <button class="button" data-filter=".Helen">Helen</button>
             <button class="button" data-filter=".Beth">Beth</button>
             <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
         </div>
 
         <h3>Sort</h3>
-        <div id="sorts" class="button-group"> <button class="button is-checked" data-sort-by="original-order">original
+        <div id="sorts" class="button-group">
+            <button class="button is-checked" data-sort-by="original-order">original
                 order</button>
             <button class="button" data-sort-by="title">Title</button>
             <button class="button" data-sort-by="author">Author</button>
@@ -58,3 +62,4 @@
         </div>
     </main>
 </body>
+</html>
