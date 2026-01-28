@@ -7,35 +7,23 @@ body {
   color: #1e352f;
 }
 
-/* On mobile devices, display image aside below image */
-@media (max-width: 600px) {
-    main {
-      width: 100%;
-        margin: 0px;
-    }
 
-    .book-container {
-
-    }
-
-    .book-item {
-      width: 100%;
-      /*border: 1px solid black;*/
-      display: grid;
-      margin: 0px;
-      grid-template-rows: 320px;
-      grid-template-columns: 50% auto;
-    }
-}
 
 main {
   margin: 5%;
 }
 
+.currently {
+  margin: 5%;
+  display: grid;
+  grid-template-rows: 142px auto;
+  grid-template-columns: 323px auto;
+  grid-auto-flow: column;
+}
+
 .book-container {
   width: 100%;
   display: flex;
-  /*grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));*/
 }
 
 /* .current-book {
@@ -57,12 +45,26 @@ main {
   margin: 5px;
   display: grid;
   grid-template-rows: 310px;
-  grid-template-columns: auto 280px;
+  grid-template-columns: auto 230px;
   font-size: 13px;
 }
 
+.logo-image {
+  
+  border: 2px solid #084500;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid #084500;
+  background: none;
+  font-family: monospace, Helvetica, Arial, sans-serif;
+}
+
 .book-item p {
-  height: 10px;
+  margin: 0px;
 }
 
 .book-cover {
@@ -79,13 +81,13 @@ main {
 
 .book-info {
   display: block;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin: 10px 0px 0px 10px;
 }
 
 .title {
   font-weight: 600;
   font-size: 15px;
+  line-height: 80%;
 }
 
 .author {
@@ -93,4 +95,35 @@ main {
   font-size: 15px;
   line-height: 80%;
   font-style: italic;
+}
+
+/* On mobile devices, display image aside below image */
+@media (max-width: 600px) {
+    main {
+      width: 100%;
+        margin: 0px;
+    }
+
+    .book-item {
+      width: 100%;
+      border: 1px solid #084500;
+      border-radius: 25px;
+      margin: 5px;
+      display: grid;
+      grid-template-rows: 310px;
+      grid-template-columns: auto 280px;
+      font-size: 13px;
+    }
+
+    
+    .book-cover img {
+      filter: drop-shadow(5px 5px 5px #1b1b1b);
+      width: 100px;
+      transform: rotate(10deg);
+    }
+
+    .currently {
+      display: flex;
+      flex-direction: column;
+    }
 }

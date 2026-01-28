@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
@@ -15,16 +16,22 @@
 
 <body>
     <header>
-        <h1>Currently reading...</h1>
-        <div style="display: flex">
+        <div class="currently">
             <div>
-                <img src="https://berlinbeerbook.club/static/images/site_images/BBandBC-2.png">
+                <img class="logo-image" src="https://berlinbeerbook.club/static/images/site_images/BBandBC-2.png">
+            </div>
+            <div>
+                The website is for a book clube set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
+                We've read <span class="number-books">18</span> books so far!</div>
+            <div>
+                <h1>Currently reading...</h1>
             </div>
             <div class="book-item">
                 <div class="book-cover"><img
                         src="https://berlinbeerbook.club/static/images/book_covers/rebecca_daphne_du_maurier.jpg">
                 </div>
-                <div class="book-info"><b>Rebecca</b><br>
+                <div class="book-info">
+                    <b>Rebecca</b><br>
                     Daphne du Maurier<br>
                     <i>Currently reading</i>
                     Genre: Gothic fantasy / mystery<br>
@@ -62,4 +69,5 @@
         </div>
     </main>
 </body>
+
 </html>

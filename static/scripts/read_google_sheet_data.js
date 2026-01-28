@@ -56,6 +56,23 @@ function initIsotope() {
   });
 }
 
+
+function relayoutIfReady() {
+  const book_container = document.querySelector(".book-container");
+  const iso = Isotope.data(book_container);
+  if (iso) iso.layout();
+}
+
+let isMobile = window.innerWidth <= 600;
+
+window.addEventListener('resize', () => {
+  const nowMobile = window.innerWidth <= 600;
+  if (nowMobile !== isMobile) {
+    isMobile = nowMobile;
+    relayoutIfReady();
+  }
+});
+
 // https://docs.google.com/spreadsheets/d/1r9oKI47-_qaL_45qixRrOVO5_WsqmMUyHAhl3r8r3d0/edit?usp=sharing
 
 // Construct the URL for Google Sheets API v4
@@ -167,7 +184,7 @@ async function fetchGoogleSheetData() {
         if (key == "date") {
           const month = value.toLocaleString('default', { month: 'short' });
           const year = value.toLocaleString('default', { year: 'numeric' });
-          title_p.innerText = month + " " + year
+          title_p.innerText = "Picked in " + month + " " + year
         } else if (key == "allRatings") {
           //skip
           continue;
@@ -182,7 +199,7 @@ async function fetchGoogleSheetData() {
         if (value != "dnf") {
           title_p.innerText = key + ": " + ratingMap[Math.round(value)];
         } else {
-          title_p.innerText = key + ": " + ratingMap[Math.round("dnf")];
+          title_p.innerText = key + ": " + ratingMap["dnf"];
         }
         book_info.appendChild(title_p)
       }
