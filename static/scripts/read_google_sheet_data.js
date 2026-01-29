@@ -56,22 +56,53 @@ function initIsotope() {
   });
 }
 
+function createCurrentBook(currentBook) {
+  // Get the "currently" element
+  const book_container = document.querySelector(".currently");
 
-function relayoutIfReady() {
-  const book_container = document.querySelector(".book-container");
-  const iso = Isotope.data(book_container);
-  if (iso) iso.layout();
-}
+  const book_div = document.createElement("div");
 
-let isMobile = window.innerWidth <= 600;
+  // construct the book div
+  book_div.setAttribute("class", "book-item");
 
-window.addEventListener('resize', () => {
-  const nowMobile = window.innerWidth <= 600;
-  if (nowMobile !== isMobile) {
-    isMobile = nowMobile;
-    relayoutIfReady();
+
+  const book_cover = document.createElement("div");
+  book_cover.setAttribute("class", "book-cover");
+  const book_info = document.createElement("div");
+  book_info.setAttribute("class", "book-info");
+  book_div.appendChild(book_info);
+  book_div.appendChild(book_cover);
+
+  //src={{ url_for('static', filename=current_book['cover_image_url']) }}
+  //https://berlinbeerbook.club/static/images/book_covers/vampire_blood_trilogy_darren_shan.jpg
+  var url_title = currentBook["title"].trim().replaceAll(" ", "_").replace(/\W+/g, "").toLowerCase();
+  var url_author = currentBook["author"].trim().replaceAll(" ", "_").replace(/\W+/g, "").toLowerCase();
+
+  var imgElement = document.createElement("img");
+  const book_cover_url = img_url + url_title + "_" + url_author + ".jpg";
+  console.log(book_cover_url);
+  imgElement.setAttribute("src", book_cover_url);
+
+  book_cover.appendChild(imgElement);
+
+  for (const [key, value] of Object.entries(currentBook)) {
+    const title_p = document.createElement("p");
+    title_p.setAttribute("class", key);
+    if (key == "date") {
+      const month = value.toLocaleString('default', { month: 'short' });
+      const year = value.toLocaleString('default', { year: 'numeric' });
+      title_p.innerText = "Picked in " + month + " " + year
+    } else if (key == "allRatings") {
+      //skip
+      continue;
+    } else {
+      title_p.innerText = value;
+    }
+    book_info.appendChild(title_p)
   }
-});
+
+  book_container.appendChild(book_div)
+}
 
 // https://docs.google.com/spreadsheets/d/1r9oKI47-_qaL_45qixRrOVO5_WsqmMUyHAhl3r8r3d0/edit?usp=sharing
 
@@ -116,6 +147,10 @@ async function fetchGoogleSheetData() {
     listOfBooks = []
     listOfRatings = []
 
+
+    const no_books_span = document.querySelector(".number-books");
+    no_books_span.innerText = " " + rows.length - 2
+
     for (let i = 1; i < rows.length; i++) {
       const row = rows[i];
 
@@ -146,6 +181,7 @@ async function fetchGoogleSheetData() {
     // Get the current book
     var currentBook = listOfBooks.shift();
 
+    createCurrentBook(currentBook)
 
     // Loop through the rows (starting from row 1 to skip headers)
     for (let i = 0; i < listOfBooks.length; i++) {
@@ -153,7 +189,7 @@ async function fetchGoogleSheetData() {
       const bookMap = listOfBooks[i];
 
       const book_div = document.createElement("div");
-      
+
       // construct the book div
       book_div.setAttribute("class", "book-item " + bookMap["picker"]);
       book_div.setAttribute("data-category", bookMap["picker"]);
