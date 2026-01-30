@@ -19,7 +19,7 @@ function initIsotope() {
     itemSelector: '.book-item',
     layoutMode: 'fitRows',
     sortAscending: {
-      rating: false
+      average: false
     },
     getSortData: {
       title: '.title',
@@ -28,7 +28,11 @@ function initIsotope() {
       year: '.year',
       date: '.date',
       average: '.average parseFloat',
-      picker: '[data-category]'
+      picker: '[data-category]',
+      date: function (itemElem) {
+        var date = $(itemElem).find('.date').text();
+        return Date.parse(date);
+      }
     }
   });
 
@@ -63,7 +67,7 @@ function createCurrentBook(currentBook) {
   const book_div = document.createElement("div");
 
   // construct the book div
-  book_div.setAttribute("class", "book-item");
+  book_div.setAttribute("class", "book-item current");
 
 
   const book_cover = document.createElement("div");

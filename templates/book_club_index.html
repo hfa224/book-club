@@ -2,78 +2,59 @@
 <html lang="en">
 
 <head>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/read_google_sheet_data.js') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-
 </head>
 
 <body>
     <header>
         <div class="currently">
-            <div>
+            <div class="logo-image">
                 <img class="logo-image" src="https://berlinbeerbook.club/static/images/site_images/BBandBC-2.png">
             </div>
-            <div>
+            <div class="about">
                 <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
-                We've read <span class="number-books">x</span> books so far!</p>
+                    We've read <span class="number-books">x</span> books so far.</p>
                 <!--make this reveal when you click a camera emoji-->
                 <details>
                     <summary></summary>
 
-                <div class="polaroid">
-                    <img class="img-square" src="https://berlinbeerbook.club/static/images/berlin-2022.jpg">
-                    Berlin, 2022
-                </div>
-            </details>
+                    <div class="polaroid">
+                        <img class="img-square" src="https://berlinbeerbook.club/static/images/berlin-2022.jpg">
+                        Berlin, 2022
+                    </div>
+                </details>
             </div>
-            <div style="align-self: end;">
+            <div class="currently-reading">
                 <h1>Currently reading...</h1>
             </div>
-            <!-- <div class="book-item">
-                <div class="book-cover"><img
-                        src="https://berlinbeerbook.club/static/images/book_covers/rebecca_daphne_du_maurier.jpg">
-                </div>
-                <div class="book-info">
-                    <b>Rebecca</b><br>
-                    Daphne du Maurier<br>
-                    <i>Currently reading</i>
-                    Genre: Gothic fantasy / mystery<br>
-                    Chosen by: Beth on 01-2026
-                </div>
-            </div> -->
         </div>
     </header>
     <nav>
     </nav>
     <main>
         <h2>Previous books...</h2>
-        <h3>Filter</h3>
-        <div id="filters" class="button-group">
-            <button class="button is-checked" data-filter="*">show all</button>
-            <button class="button" data-filter=".Helen">Helen</button>
-            <button class="button" data-filter=".Beth">Beth</button>
-            <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
+        <div class="buttons-container">
+            <div id="filters" class="button-group">
+                <button class="button is-checked" data-filter="*">show all</button>
+                <button class="button" data-filter=".Helen">Helen</button>
+                <button class="button" data-filter=".Beth">Beth</button>
+                <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
+            </div>
+            <div id="sorts" class="button-group">
+                <button class="button is-checked" data-sort-by="original-order">original
+                    order</button>
+                <button class="button" data-sort-by="title">Title (a-z)</button>
+                <button class="button" data-sort-by="author">Author (a-z)</button>
+                <button class="button" data-sort-by="year">Publication Year (old - new)</button>
+                <button class="button" data-sort-by="date">Date picked (new - old)</button>
+                <button class="button" data-sort-by="average">Rating (high to low)</button>
+            </div>
         </div>
-
-        <h3>Sort</h3>
-        <div id="sorts" class="button-group">
-            <button class="button is-checked" data-sort-by="original-order">original
-                order</button>
-            <button class="button" data-sort-by="title">Title</button>
-            <button class="button" data-sort-by="author">Author</button>
-            <button class="button" data-sort-by="year">Year</button>
-            <button class="button" data-sort-by="date">Date picked</button>
-            <button class="button" data-sort-by="genre">Genre</button>
-            <button class="button" data-sort-by="average">Rating</button>
-        </div>
-
         <div class="book-container">
 
         </div>
