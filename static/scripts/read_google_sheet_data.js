@@ -4,7 +4,7 @@
 const spreadsheetId = "1r9oKI47-_qaL_45qixRrOVO5_WsqmMUyHAhl3r8r3d0";
 
 // Replace with your API Key
-const apiKey = "AIzaSyChKod4X-iB9laGOWxGJ3UvZWWK56slY0Q";
+const apiKey = "AIzaSyCI2Q8dSZPGxuuMYlJqW3UWT29hESJ9BmY";
 
 function dateParse(dateString) {
   const month_year = dateString.split("-");
@@ -96,7 +96,7 @@ function createCurrentBook(currentBook) {
       const month = value.toLocaleString('default', { month: 'short' });
       const year = value.toLocaleString('default', { year: 'numeric' });
       title_p.innerText = "Picked in " + month + " " + year
-    } else if (key == "allRatings") {
+    } else if (key == "allRatings" || key == "average") {
       //skip
       continue;
     } else {
@@ -106,6 +106,25 @@ function createCurrentBook(currentBook) {
   }
 
   book_container.appendChild(book_div)
+}
+
+function addNextPickerData(currentBook) {
+
+  const pickerList = ["Beth", "Helen", "Max"];
+
+  let currentPicker = currentBook["picker"];
+  let currentDate = currentBook["date"];
+  var nextDate = new Date(currentDate.setMonth(currentDate.getMonth() + 1));
+
+  let nextPickerIndex = (pickerList.indexOf(currentPicker) + 1) % 3;
+
+  const next_picker_container = document.querySelector(".next-picker");
+  const next_date_container = document.querySelector(".next-date");
+  next_picker_container.innerText = pickerList[nextPickerIndex]
+  const month = nextDate.toLocaleString('default', { month: 'short' });
+  const year = nextDate.toLocaleString('default', { year: 'numeric' });
+  next_date_container.innerText = month + " " + year
+
 }
 
 // https://docs.google.com/spreadsheets/d/1r9oKI47-_qaL_45qixRrOVO5_WsqmMUyHAhl3r8r3d0/edit?usp=sharing
@@ -185,7 +204,8 @@ async function fetchGoogleSheetData() {
     // Get the current book
     var currentBook = listOfBooks.shift();
 
-    createCurrentBook(currentBook)
+    createCurrentBook(currentBook);
+    addNextPickerData(currentBook);
 
     // Loop through the rows (starting from row 1 to skip headers)
     for (let i = 0; i < listOfBooks.length; i++) {

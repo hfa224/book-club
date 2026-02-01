@@ -17,7 +17,7 @@ main {
 header {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 70%;
 }
 
 /* Currently view */
@@ -25,14 +25,20 @@ header {
 .currently {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  grid-template-columns: 342px auto;
+  grid-template-columns: repeat(2, 50%);
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
 }
 
+.currently .book-item {
+  width: 90%;
+}
+
 div.about {
+  display: grid;
   grid-row: 2 / span 2;
+  align-self: start;
   justify-self: center;
 }
 
@@ -83,16 +89,19 @@ div.logo-image {
 .book-container {
   width: 100%;
   display: flex;
+  
+    align-items: center;
+    justify-content: center;
 }
 
 .book-item {
   width: 30%;
   border: 1px solid #084500;
   border-radius: 25px;
-  margin: 5px;
+  margin: 1.5%;
   display: grid;
   grid-template-rows: 310px;
-  grid-template-columns: auto 230px;
+  grid-template-columns: auto 210px;
   font-size: 13px;
 }
 
@@ -109,7 +118,7 @@ div.logo-image {
 .book-cover img {
   filter: drop-shadow(5px 5px 5px #1b1b1b);
   width: 180px;
-  transform: rotate(10deg);
+  /*transform: rotate(10deg);*/
 }
 
 .book-info {
@@ -130,11 +139,16 @@ div.logo-image {
   font-style: italic;
 }
 
+.genre {
+  line-height: 80%;
+  margin-top:10px;
+}
+
 /* Button style */
 
 button {
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 15px;
   border: 1px solid #084500;
   background: none;
   font-family: monospace, Helvetica, Arial, sans-serif;
