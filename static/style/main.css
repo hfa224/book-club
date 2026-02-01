@@ -217,7 +217,11 @@ details[open]::details-content {
 /* On mobile devices, display image aside below image */
 @media (max-width: 600px) {
   main {
-    width: 100%;
+    width: 95%;
+  }
+
+  header {
+    width: 90%;
   }
 
   .book-item {
