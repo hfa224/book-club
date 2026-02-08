@@ -14,7 +14,7 @@ main {
   width: 80%;
 }
 
-header {
+header, nav {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
@@ -29,6 +29,16 @@ header {
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
+}
+
+.site-title {
+  display: block; text-align: center; width:100%;
+  grid-column: 1 / span 2;
+  align-self: center;
+}
+
+.Helen, .Max, .Beth {
+  font-size: 18px;
 }
 
 .currently .book-item {
@@ -118,7 +128,7 @@ div.logo-image {
 .book-cover img {
   filter: drop-shadow(5px 5px 5px #1b1b1b);
   width: 180px;
-  /*transform: rotate(10deg);*/
+  transform: rotate(10deg);
 }
 
 .book-info {
@@ -139,7 +149,17 @@ div.logo-image {
   font-style: italic;
 }
 
+.date {
+  line-height: 80%;
+  margin-top:10px;
+}
+
 .genre {
+  line-height: 80%;
+  margin-top:10px;
+}
+
+.picked {
   line-height: 80%;
   margin-top:10px;
 }
@@ -183,17 +203,17 @@ button:hover {
 details>summary {
   list-style: none;
 
-  &::after {
+  &::before {
     content: "📷";
     font-size: 30px;
   }
 
-  [open] &::after {
+  [open] &::befpre {
     content: "📸";
     font-size: 30px;
   }
 
-  &::after:hover {
+  &::before:hover {
     content: "📸";
     font-size: 30px;
     cursor: pointer;
@@ -203,7 +223,7 @@ details>summary {
 details>summary:hover {
   list-style: none;
 
-  &::after {
+  &::before {
     content: "📸";
     font-size: 30px;
     cursor: pointer;
@@ -237,9 +257,7 @@ details[open]::details-content {
 
 
   .book-cover img {
-    filter: drop-shadow(5px 5px 5px #1b1b1b);
     width: 150px;
-    transform: rotate(10deg);
   }
 
   .currently {

@@ -28,6 +28,9 @@ function initIsotope() {
       year: '.year',
       date: '.date',
       average: '.average parseFloat',
+      helen_rating: '.Helen',
+      beth_rating: '.Beth',
+      max_rating: '.Max',
       picker: '[data-category]',
       date: function (itemElem) {
         var date = $(itemElem).find('.date').text();
@@ -256,6 +259,7 @@ async function fetchGoogleSheetData() {
 
       for (const [key, value] of Object.entries(bookMap["allRatings"])) {
         const title_p = document.createElement("p");
+        title_p.setAttribute("class", key);
         if (value != "dnf") {
           title_p.innerText = key + ": " + ratingMap[Math.round(value)];
         } else {

@@ -13,8 +13,9 @@
 <body>
     <header>
         <div class="currently">
-            <div style="text-align: center; width:100%">
-                <h1><img style="height: 100px" src="static/images/site_images/BBandBCicons-transparent.png">Berlin Beer and Book Club</h1>
+            <div class="site-title">
+                <img style="height: 100px" src="static/images/site_images/BBandBCicons-transparent.png">
+                <h1>Berlin Beer and Book Club</h1>
             </div>
             <div class="about">
                 <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
@@ -24,7 +25,6 @@
                 <!--make this reveal when you click a camera emoji-->
                 <details>
                     <summary>Click me!</summary>
-
                     <div class="polaroid">
                         <img class="img-square" src="static/images/berlin-2022.jpg">
                         Berlin, 2022
@@ -32,14 +32,12 @@
                 </details>
             </div>
             <div class="currently-reading">
-                <h1>Currently reading...</h1>
+                <h2>Currently reading...</h2>
             </div>
         </div>
     </header>
     <nav>
-    </nav>
-    <main>
-        <h2>Previous books...</h2>
+                <h2>Previous books...</h2>
         <div class="buttons-container">
             <div id="filters" class="button-group">
                 <button class="button is-checked" data-filter="*">show all</button>
@@ -54,9 +52,15 @@
                 <button class="button" data-sort-by="author">Author (a-z)</button>
                 <button class="button" data-sort-by="year">Publication Year (old - new)</button>
                 <button class="button" data-sort-by="date">Date picked (new - old)</button>
-                <button class="button" data-sort-by="average">Rating (high to low)</button>
+                <button class="button" data-sort-by="average">Average rating (high to low)</button>
+                <button class="button" data-sort-by="helen_rating">Helen's rating (high to low)</button>
+                <button class="button" data-sort-by="max_rating">Max's rating (high to low)</button>
+                <button class="button" data-sort-by="beth_rating">Beth's rating (high to low)</button>
             </div>
         </div>
+    </nav>
+    <main>
+
         <div class="book-container">
 
         </div>
