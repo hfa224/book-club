@@ -37,10 +37,6 @@ header, nav {
   align-self: center;
 }
 
-.Helen, .Max, .Beth {
-  font-size: 18px;
-}
-
 .currently .book-item {
   width: 90%;
 }
@@ -240,7 +236,7 @@ details[open]::details-content {
     width: 95%;
   }
 
-  header {
+  header, nav {
     width: 90%;
   }
 
