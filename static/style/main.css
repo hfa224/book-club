@@ -124,7 +124,7 @@ div.logo-image {
 .book-cover img {
   filter: drop-shadow(5px 5px 5px #1b1b1b);
   width: 180px;
-  transform: rotate(10deg);
+  transform: rotate(0deg);
 }
 
 .book-info {
