@@ -19,7 +19,10 @@ function initIsotope() {
     itemSelector: '.book-item',
     layoutMode: 'fitRows',
     sortAscending: {
-      average: false
+      average: false,
+      helen_rating: false,
+      beth_rating: false,
+      max_rating: false
     },
     getSortData: {
       title: '.title',
@@ -261,7 +264,7 @@ async function fetchGoogleSheetData() {
         const title_p = document.createElement("p");
         title_p.setAttribute("class", key);
         if (value != "dnf") {
-          title_p.innerText = key + ": " + ratingMap[Math.round(value)];
+          title_p.innerText = key + ": " + value;
         } else {
           title_p.innerText = key + ": " + ratingMap["dnf"];
         }
