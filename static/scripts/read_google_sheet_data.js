@@ -13,6 +13,26 @@ function dateParse(dateString) {
   return new Date(parseInt(month_year[1]), parseInt(month_year[0]) - 1)
 }
 
+const ratingMap = {
+      5: "🌟",
+      4: "😊",
+      3: "😐",
+      2: "😞",
+      1: "😖",
+      "dnf": "🚫"
+    };
+
+function sortRating(ratingText) {
+  // split the rating string on " " and take the second half to
+  // get the numerical rating
+  var rating = ratingText.split(" ")[1];
+  console.log(rating)
+  if (rating.includes(ratingMap['dnf'])) {
+    return 0;
+  }
+  return parseFloat(rating);
+}
+
 // init Isotope
 function initIsotope() {
   var $grid = $('.book-container').isotope({
@@ -31,9 +51,15 @@ function initIsotope() {
       year: '.year',
       date: '.date',
       average: '.average parseFloat',
-      helen_rating: '.Helen',
-      beth_rating: '.Beth',
-      max_rating: '.Max',
+      helen_rating: function( itemElem ) {
+        return sortRating($( itemElem ).find('.Helen').text());
+      },
+      beth_rating: function( itemElem ) {
+        return sortRating($( itemElem ).find('.Beth').text());
+      },
+      max_rating: function( itemElem ) {
+        return sortRating($( itemElem ).find('.Max').text());
+      },
       picker: '[data-category]',
       date: function (itemElem) {
         var date = $(itemElem).find('.date').text();
@@ -164,14 +190,7 @@ async function fetchGoogleSheetData() {
     // 8 - Genre
     // 9 - Average (could just calculate?)
 
-    var ratingMap = {
-      5: "🌟",
-      4: "😊",
-      3: "😐",
-      2: "😞",
-      1: "😖",
-      "dnf": "🚫"
-    };
+    
 
     listOfBooks = []
     listOfRatings = []
