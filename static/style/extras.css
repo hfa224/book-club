@@ -8,7 +8,10 @@
 }
 
 .site-title {
-  display: block; text-align: center; width:100%;
+  display: grid; 
+  grid-template-columns: repeat(3, auto);
+  text-align: center; 
+  width:100%;
   grid-column: 1 / span 2;
   align-self: center;
 }

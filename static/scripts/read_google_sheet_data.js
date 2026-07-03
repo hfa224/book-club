@@ -14,20 +14,19 @@ function dateParse(dateString) {
 }
 
 const ratingMap = {
-      5: "🌟",
-      4: "😊",
-      3: "😐",
-      2: "😞",
-      1: "😖",
-      "dnf": "🚫"
-    };
+  5: "🌟",
+  4: "😊",
+  3: "😐",
+  2: "😞",
+  1: "😖",
+  "dnf": "🚫"
+};
 
 function sortRating(ratingText) {
   // split the rating string on " " and take the second half to
   // get the numerical rating
   var rating = ratingText.split(" ")[1];
-  console.log(rating)
-  if (rating.includes(ratingMap['dnf'])) {
+  if (rating == undefined || rating.includes(ratingMap['dnf'])) {
     return 0;
   }
   return parseFloat(rating);
@@ -50,14 +49,14 @@ function initIsotope() {
       year: '.year',
       date: '.date',
       average: '.average parseFloat',
-      helen_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Helen').text());
+      helen_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Helen').text());
       },
-      beth_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Beth').text());
+      beth_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Beth').text());
       },
-      max_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Max').text());
+      max_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Max').text());
       },
       picker: '[data-category]',
       date: function (itemElem) {
@@ -138,9 +137,9 @@ function createCurrentBook(currentBook) {
   }
 
   const blurb_p = document.createElement("p");
-    blurb_p.innerText = "Cartoonist Zoe Thorogood records 6 months of her own life as it falls apart in a desperate attempt to put it back together again in the only way she knows how. IT’S LONELY AT THE CENTRE OF THE EARTH is an intimate and metanarrative look into the life of a selfish artist who must create for her own survival."
+  blurb_p.innerText = "Cartoonist Zoe Thorogood records 6 months of her own life as it falls apart in a desperate attempt to put it back together again in the only way she knows how. IT’S LONELY AT THE CENTRE OF THE EARTH is an intimate and metanarrative look into the life of a selfish artist who must create for her own survival."
 
-    book_info.appendChild(blurb_p)
+  book_info.appendChild(blurb_p)
 
   book_container.appendChild(book_div)
 }
@@ -195,7 +194,7 @@ async function fetchGoogleSheetData() {
     // 8 - Genre
     // 9 - Average (could just calculate?)
 
-    
+
 
     listOfBooks = []
     listOfRatings = []
@@ -242,6 +241,8 @@ async function fetchGoogleSheetData() {
 
       const bookMap = listOfBooks[i];
 
+      const isCurrentBook = i == 0;
+
       const book_div = document.createElement("div");
 
       // construct the book div
@@ -280,7 +281,28 @@ async function fetchGoogleSheetData() {
           const year = value.toLocaleString('default', { year: 'numeric' });
           const text = month + " " + year
           date.setAttribute("class", date.getAttribute("class") + " " + key);
-          date.innerHTML =text;
+          date.innerHTML = text;
+          continue;
+        } if (key == "average") {
+          // add starburst
+          //     <div class="starburst rating">
+          // <b>?</b></div>
+          if (!isCurrentBook) {
+            const starburst_div = document.createElement("div");
+            starburst_div.setAttribute("class", "starburst average")
+            starburst_div.innerHTML = value;
+            book_cover.appendChild(starburst_div)
+          } else {
+            const currently_sash = document.createElement("div");
+            currently_sash.setAttribute("class", "currently-sash");
+            currently_sash.innerHTML = "Currently reading!";
+            book_cover.appendChild(currently_sash);
+            const av_div = document.createElement("div");
+            av_div.setAttribute("class", "average");
+            av_div.setAttribute("style", "display: none;");
+            av_div.innerHTML = "0";
+            book_cover.appendChild(av_div);
+          }
           continue;
         } else if (key == "allRatings") {
           //skip
@@ -291,15 +313,19 @@ async function fetchGoogleSheetData() {
         book_info.appendChild(title_p)
       }
 
-      for (const [key, value] of Object.entries(bookMap["allRatings"])) {
-        const title_p = document.createElement("p");
-        title_p.setAttribute("class", key);
-        if (value != "dnf") {
-          title_p.innerText = key + ": " + value;
-        } else {
-          title_p.innerText = key + ": " + ratingMap["dnf"];
+      if (isCurrentBook) {
+        // skip ratings
+      } else {
+        for (const [key, value] of Object.entries(bookMap["allRatings"])) {
+          const title_p = document.createElement("p");
+          title_p.setAttribute("class", key);
+          if (value != "dnf") {
+            title_p.innerText = key + ": " + value;
+          } else {
+            title_p.innerText = key + ": " + ratingMap["dnf"];
+          }
+          book_info.appendChild(title_p)
         }
-        book_info.appendChild(title_p)
       }
       book_container.appendChild(book_div)
     }
