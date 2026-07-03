@@ -37,7 +37,6 @@ function sortRating(ratingText) {
 function initIsotope() {
   var $grid = $('.book-container').isotope({
     itemSelector: '.book-item',
-    layoutMode: 'fitRows',
     sortAscending: {
       average: false,
       helen_rating: false,
@@ -134,8 +133,14 @@ function createCurrentBook(currentBook) {
     } else {
       title_p.innerText = value;
     }
+
     book_info.appendChild(title_p)
   }
+
+  const blurb_p = document.createElement("p");
+    blurb_p.innerText = "Cartoonist Zoe Thorogood records 6 months of her own life as it falls apart in a desperate attempt to put it back together again in the only way she knows how. IT’S LONELY AT THE CENTRE OF THE EARTH is an intimate and metanarrative look into the life of a selfish artist who must create for her own survival."
+
+    book_info.appendChild(blurb_p)
 
   book_container.appendChild(book_div)
 }
@@ -227,9 +232,9 @@ async function fetchGoogleSheetData() {
       return b["date"] - a["date"];
     })
     // Get the current book
-    var currentBook = listOfBooks.shift();
+    var currentBook = listOfBooks[0];
 
-    createCurrentBook(currentBook);
+    //createCurrentBook(currentBook);
     addNextPickerData(currentBook);
 
     // Loop through the rows (starting from row 1 to skip headers)
@@ -244,10 +249,14 @@ async function fetchGoogleSheetData() {
       book_div.setAttribute("data-category", bookMap["picker"]);
 
 
-      const book_cover = document.createElement("div");
-      book_cover.setAttribute("class", "book-cover");
+      const date = document.createElement("div");
+      date.setAttribute("class", "timeline-date");
       const book_info = document.createElement("div");
-      book_info.setAttribute("class", "book-info");
+      book_info.setAttribute("class", "timeline");
+      const book_cover = document.createElement("div");
+      book_cover.setAttribute("class", "book-content");
+
+      book_div.appendChild(date);
       book_div.appendChild(book_info);
       book_div.appendChild(book_cover);
 
@@ -258,7 +267,7 @@ async function fetchGoogleSheetData() {
 
       var imgElement = document.createElement("img");
       const book_cover_url = img_url + url_title + "_" + url_author + ".jpg";
-      console.log(book_cover_url);
+      //console.log(book_cover_url);
       imgElement.setAttribute("src", book_cover_url);
 
       book_cover.appendChild(imgElement);
@@ -269,7 +278,10 @@ async function fetchGoogleSheetData() {
         if (key == "date") {
           const month = value.toLocaleString('default', { month: 'short' });
           const year = value.toLocaleString('default', { year: 'numeric' });
-          title_p.innerText = "Picked in " + month + " " + year
+          const text = month + " " + year
+          date.setAttribute("class", date.getAttribute("class") + " " + key);
+          date.innerHTML =text;
+          continue;
         } else if (key == "allRatings") {
           //skip
           continue;
@@ -289,7 +301,6 @@ async function fetchGoogleSheetData() {
         }
         book_info.appendChild(title_p)
       }
-
       book_container.appendChild(book_div)
     }
 

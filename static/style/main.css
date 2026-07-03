@@ -25,7 +25,6 @@ header, nav {
 .currently {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  grid-template-columns: repeat(2, 50%);
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
@@ -145,19 +144,16 @@ div.logo-image {
   font-style: italic;
 }
 
-.date {
+.date, .picker, .year {
   line-height: 80%;
-  margin-top:10px;
 }
 
 .genre {
   line-height: 80%;
-  margin-top:10px;
 }
 
 .picked {
   line-height: 80%;
-  margin-top:10px;
 }
 
 /* Button style */

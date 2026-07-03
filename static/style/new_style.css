@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&family=Bonbon&family=Lexend:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+
+:root {
+    --cream: #f7f3e8;
+    --cherry: red;
+    --green: #82c144;
+    --navy: #0c3493;
+    --charcoal: #626262;
+    --bg: var(--cream);
+    --fg: var(--navy);
+  --highlight: var(--navy);
+  
+    /* pink - orange scheme */
+    --pink: #ffcfef;
+    --red-orange: #f41c0c;
+
+    --image-max-size: 324px;
+
+    --font-family: "Libre Baskerville";
+    --body-font-family: "Roboto Serif";
+}
+
+
+
+header {
+  text-align:center;
+}
+
+body {
+  margin: 5% 25% 5% 25%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.2rem;
+  max-width: 80%;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family);
+}
+
+.scores {
+  font-family: Roboto Serif;
+  font-size: 0.9rem;
+}
+
+.date, .picked-by, .genre {
+  font-family: Roboto Serif;
+  font-size: 0.9rem;
+}
+
+.title {
+  font-family: Libre Baskerville;
+  font-size: 1rem;
+  line-height: 0.8rem;
+}
+
+.author {
+  font-family: Libre Baskerville;
+  font-size: 1rem;
+  line-height: 0.8rem;
+  font-style: italic;
+  
+}
+
+.timeline-date {
+  writing-mode: sideways-lr;
+  text-orientation: sideways;
+  font-size: 4rem;
+  font-family: var(--font-family);
+  font-weight: 600;
+  margin-top: 1em;
+}
+
+.starburst {
+  position: absolute; top: 0rem; left: 10rem;
+  width: 100px; /* adjust to control the size */
+  font-size: 2.5rem;
+  color: #333333;
+  line-height: 2.5em;
+  background-color: gold;
+  text-align: center;
+  aspect-ratio: 1;
+    clip-path: polygon(95.36% 71.03%,72.56% 69.78%,76.79% 92.22%,58.29% 78.83%,49.71% 100%,41.38% 78.74%,22.73% 91.91%,27.22% 69.52%,4.4% 70.51%,20.28% 54.1%,0.55% 42.6%,22.78% 37.38%,12.4% 17.04%,33.93% 24.67%,36.19% 1.95%,50.17% 20%,64.36% 2.11%,66.36% 24.86%,87.97% 17.47%,77.36% 37.69%,99.53% 43.17%,79.67% 54.44%);
+
+}
+
+.book-content {
+  position: relative;
+}
+
+.book-content img {
+  width: 250px;
+}
+
+hr {
+  background-color: var(--highlight);
+  height: 5px;
+  border: none;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+.book-item {
+  display: flex;
+  column-gap: 1.3rem;
+  width: 100%;
+}
+
+button {
+  border: none;
+  border-bottom: dotted 2px var(--fg);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font-family);
+}
+
+button:hover {
+  background: var(--fg);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  border-bottom: dotted 2px var(--fg);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font-family);
+}
+
+.timeline {
+  border-left: 5px solid var(--highlight);
+  padding-left: 25px;
+  width: 45%;
+  padding-bottom: 10%;
+}
+
+.timeline-date {
+  writing-mode: sideways-lr;
+  text-orientation: sideways;
+  font-size: 3rem;
+  font-family: var(--font-family);
+  font-weight: 600;
+  text-align: center;
+}
+
+a:link {
+  text-decoration: var(--highlight) dotted 2px underline;
+}
+
+a:visited {
+  color: var(--cherry);
+  text-decoration: var(--cherry) dotted 2px underline;
+}
+
+a:hover {
+}
+
+a:active {
+}
+
+/* On mobile devices, display image aside below image */
+@media (max-width: 600px) {
+  
+  body {
+  margin: 2%;
+  font-size: 1rem;
+  max-width: 95%;
+}
+  main {
+    width: 95%;
+  }
+
+  header, nav {
+    width: 90%;
+  }
+  
+  .timeline-date {
+  writing-mode: sideways-lr;
+  text-orientation: sideways;
+  font-size: 2rem;
+  font-family: var(--font-family);
+  font-weight: 600;
+  margin-top: 1em;
+}
+
+
+  .book-content img {
+    width: 150px;
+  }
+  
+  .starburst {
+  position: absolute; top: 0rem; left: 120px;
+  width: 50px; /* adjust to control the size */
+  font-size: 2rem;
+  color: #333333;
+  line-height: 1em;
+
+}
+  
+  .timeline {
+    border-left: 5px solid var(--highlight);
+    padding-left: 25px;
+    width: 70%;
+  }
+  
+}
+
+
+
+
