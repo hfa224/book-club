@@ -3,9 +3,12 @@
 
 <head>
     <title>Berlin Beer and Book Club</title>
+    <!-- Site favicon -->
     <link rel="icon" type="image/x-icon" href="static/images/site_images/favicon.ico">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/new_style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/extras.css') }}">
+    <!-- Main style sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+    <!-- polaroid style sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/polaroid.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/read_google_sheet_data.js') }}"></script>
@@ -15,31 +18,32 @@
 
 <body>
     <header>
-        <div class="currently">
-            <div class="site-title">
-                <div><img style="height: 100px;" src="static/images/site_images/BBandBCicons-transparent.png"></div>
-                <div><h1>Berlin Beer and Book Club</h1></div>
-                <div><img style="height: 100px;
+        <div class="site-title">
+            <div><img style="height: 100px;" src="static/images/site_images/BBandBCicons-transparent.png"></div>
+            <div style="line-height: 3em;">
+                <h1>Berlin Beer and Book Club</h1>
+            </div>
+            <div><img style="height: 100px;
   transform: scaleX(-1);" src="static/images/site_images/BBandBCicons-transparent.png"></div>
-            </div>
-            <div class="about">
-                <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
-                    We've read <span class="number-books">x</span> books so far.</p>
-                <p>The next book will be picked by <span class="next-picker">x</span> in 
-                    <span class="next-date">x</span>.</p>
-                <!--make this reveal when you click a camera emoji-->
-                <details>
-                    <summary>Click me!</summary>
-                    <div class="polaroid">
-                        <img class="img-square" src="static/images/berlin-2022.jpg">
-                        Berlin, 2022
-                    </div>
-                </details>
-            </div>
+        </div>
+        <div class="about">
+            <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
+                We've read <span class="number-books">x</span> books so far.</p>
+            <p>The next book will be picked by <span class="next-picker">x</span> in
+                <span class="next-date">x</span>.
+            </p>
+            <!--make this reveal when you click a camera emoji-->
+            <details>
+                <summary>Click me!</summary>
+                <div class="polaroid">
+                    <img class="img-square" src="static/images/berlin-2022.jpg">
+                    Berlin, 2022
+                </div>
+            </details>
         </div>
     </header>
     <nav>
-                <h2>Previous books...</h2>
+        <h2>Previous books...</h2>
         <div class="buttons-container">
             <div id="filters" class="button-group">
                 <button class="button is-checked" data-filter="*">show all</button>
