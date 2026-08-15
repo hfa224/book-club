@@ -15,56 +15,58 @@
     <script src="{{ url_for('static', filename='scripts/details.js') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <div class="site-title">
             <div><img style="height: 100px;" src="static/images/site_images/BBandBCicons-transparent.png"></div>
-            <div style="line-height: 3em;">
+            <div style="line-height: 2em;">
                 <h1>Berlin Beer and Book Club</h1>
             </div>
             <div><img style="height: 100px;
   transform: scaleX(-1);" src="static/images/site_images/BBandBCicons-transparent.png"></div>
         </div>
         <div class="about">
-            <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
-                We've read <span class="number-books">x</span> books so far.</p>
-            <p>The next book will be picked by <span class="next-picker">x</span> in
-                <span class="next-date">x</span>.
-            </p>
+        <h3>About</h3>
+            <div class="blurb">
+                <p>The website is for a book club set up by Max, Bethany and Helen on a holiday to Berlin in 2022.
+                    We've read <span class="number-books">x</span> books so far.</p>
+                <p>The next book will be picked by <span class="next-picker">x</span> in
+                    <span class="next-date">x</span>.
+                </p>
             <!--make this reveal when you click a camera emoji-->
-            <details id="polaroid_detail">
-                <summary>Click me!</summary>
-                <div class="polaroid" onclick="closeDetails()">
-                    <img class="img-square" src="static/images/berlin-2022.jpg">
-                    Berlin, 2022
-                </div>
-            </details>
+            <div>
+                <details id="polaroid_detail">
+                    <summary>Click me!</summary>
+                    <div class="polaroid" onclick="closeDetails()">
+                        <img class="img-square" src="static/images/berlin-2022.jpg">
+                        Berlin, 2022
+                    </div>
+                </details>
         </div>
     </header>
     <nav>
+        <h3>Sort & filter books</h3>
         <div class="buttons-container">
-            <h3>Show books picked by...</h3>
             <div id="filters" class="button-group">
-                <button class="button is-checked" data-filter="*">show all</button>
-                <button class="button" data-filter=".Helen">Helen</button>
-                <button class="button" data-filter=".Beth">Beth</button>
-                <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
+                <button class="button is-checked" data-filter="*">Show all books</button>
+                <button class="button" data-filter=".Helen">Picked by Helen</button>
+                <button class="button" data-filter=".Beth">Picked by Beth</button>
+                <button class="button" data-filter=".Max, .alkaline-earth">Picked by Max</button>
             </div>
             <div id="sorts" class="button-group">
-                <h3>Sort by...</h3>
-                <button class="button is-checked" data-sort-by="original-order">original
-                    order</button>
+                <button class="button is-checked" data-sort-by="original-order">Original order</button>
                 <button class="button" data-sort-by="title">Title (a-z)</button>
                 <button class="button" data-sort-by="author">Author (a-z)</button>
-                <button class="button" data-sort-by="year">Publication Year (old - new)</button>
-                <button class="button" data-sort-by="date">Date picked (new - old)</button>
-                <h3>Sort by ratings, high to low</h3>
-                <button class="button" data-sort-by="average">Average</button>
-                <button class="button" data-sort-by="helen_rating">Helen</button>
-                <button class="button" data-sort-by="max_rating">Max</button>
-                <button class="button" data-sort-by="beth_rating">Beth</button>
+                <button class="button" data-sort-by="year">Publication Year (old to new)</button>
+                <button class="button" data-sort-by="average">Average rating (high to low)</button>
+                <button class="button" data-sort-by="helen_rating">Helen's rating (high to low)</button>
+                <button class="button" data-sort-by="max_rating">Max's rating (high to low)</button>
+                <button class="button" data-sort-by="beth_rating">Beth's rating (high to low)</button>
             </div>
         </div>
     </nav>

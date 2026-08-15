@@ -17,7 +17,7 @@
 
   --image-max-size: 324px;
 
-  --font-family: "Libre Baskerville";
+  --font-family: "Faculty Glyphic";
   --body-font-family: "Roboto Serif";
 }
 
@@ -31,12 +31,16 @@ header {
   grid-template-columns: repeat(3, auto);
   text-align: center;
   width: 100%;
-  grid-column: 1 / span 2;
-  align-self: center;
+  font-family: "Faculty Glyphic", sans-serif;
+}
+
+.about {
+  text-align: left;
+  margin-bottom: 1em;
 }
 
 body {
-  margin: 5% 25% 5% 25%;
+  margin: 0% 25% 0% 25%;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--body-font-family);
@@ -47,14 +51,24 @@ body {
 }
 
 h1 {
-  font-size: 3rem;
+  font-family: "Faculty Glyphic", sans-serif;
   font-weight: 600;
+  font-size: 3em;
+}
+
+h3 {
+  line-height: 1em;
+  text-decoration: 2px solid underline;
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-family);
+}
+
+h2, h3 {
+  margin: 0px;
 }
 
 .scores {
@@ -101,7 +115,6 @@ h3 {
   text-align: center;
   aspect-ratio: 1;
   clip-path: polygon(95.36% 71.03%, 72.56% 69.78%, 76.79% 92.22%, 58.29% 78.83%, 49.71% 100%, 41.38% 78.74%, 22.73% 91.91%, 27.22% 69.52%, 4.4% 70.51%, 20.28% 54.1%, 0.55% 42.6%, 22.78% 37.38%, 12.4% 17.04%, 33.93% 24.67%, 36.19% 1.95%, 50.17% 20%, 64.36% 2.11%, 66.36% 24.86%, 87.97% 17.47%, 77.36% 37.69%, 99.53% 43.17%, 79.67% 54.44%);
-
 }
 
 .currently-sash {
@@ -121,6 +134,7 @@ h3 {
 
 .book-content img {
   width: 250px;
+  margin-top: 1em;
 }
 
 hr {
@@ -139,12 +153,9 @@ hr {
   width: 100%;
 }
 
-button {
-  border: none;
-  border-bottom: dotted 2px var(--fg);
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--body-font-family);
+.buttons-container, .blurb {
+  padding: 1%;
+  border: solid 1px var(--fg);
 }
 
 button:hover {
@@ -153,12 +164,19 @@ button:hover {
   cursor: pointer;
 }
 
+button:active, button.is-checked {
+  background: var(--fg);
+  color: var(--bg);
+  cursor: pointer;
+}
+
 button {
   border: none;
-  border-bottom: dotted 2px var(--fg);
+  border: solid 1px var(--fg);
   background: var(--bg);
   color: var(--fg);
   font-family: var(--body-font-family);
+  margin: 2px;
 }
 
 .timeline {
@@ -196,7 +214,7 @@ a:active {}
   body {
     margin: 2%;
     font-size: 1rem;
-    max-width: 95%;
+    max-width: 100%;
   }
 
   main {
@@ -233,7 +251,7 @@ a:active {}
     left: 120px;
     width: 50px;
     /* adjust to control the size */
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #333333;
     line-height: 1em;
 

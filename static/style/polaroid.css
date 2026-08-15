@@ -54,13 +54,13 @@ details>summary:hover {
 }
 
 details[open]::details-content {
-  margin: -10% 25%;
+  margin: -80px 150px;
 }
 
 /* On mobile devices, display image aside below image */
 @media (max-width: 600px) {
 
   details[open]::details-content {
-    margin: -20% 25%;
+    margin: -80px 150px;
   }
 }
