@@ -14,20 +14,19 @@ function dateParse(dateString) {
 }
 
 const ratingMap = {
-      5: "🌟",
-      4: "😊",
-      3: "😐",
-      2: "😞",
-      1: "😖",
-      "dnf": "🚫"
-    };
+  5: "🌟",
+  4: "😊",
+  3: "😐",
+  2: "😞",
+  1: "😖",
+  "dnf": "🚫"
+};
 
 function sortRating(ratingText) {
   // split the rating string on " " and take the second half to
   // get the numerical rating
   var rating = ratingText.split(" ")[1];
-  console.log(rating)
-  if (rating.includes(ratingMap['dnf'])) {
+  if (rating == undefined || rating.includes(ratingMap['dnf'])) {
     return 0;
   }
   return parseFloat(rating);
@@ -37,7 +36,6 @@ function sortRating(ratingText) {
 function initIsotope() {
   var $grid = $('.book-container').isotope({
     itemSelector: '.book-item',
-    layoutMode: 'fitRows',
     sortAscending: {
       average: false,
       helen_rating: false,
@@ -51,14 +49,14 @@ function initIsotope() {
       year: '.year',
       date: '.date',
       average: '.average parseFloat',
-      helen_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Helen').text());
+      helen_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Helen').text());
       },
-      beth_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Beth').text());
+      beth_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Beth').text());
       },
-      max_rating: function( itemElem ) {
-        return sortRating($( itemElem ).find('.Max').text());
+      max_rating: function (itemElem) {
+        return sortRating($(itemElem).find('.Max').text());
       },
       picker: '[data-category]',
       date: function (itemElem) {
@@ -134,8 +132,14 @@ function createCurrentBook(currentBook) {
     } else {
       title_p.innerText = value;
     }
+
     book_info.appendChild(title_p)
   }
+
+  const blurb_p = document.createElement("p");
+  blurb_p.innerText = "Cartoonist Zoe Thorogood records 6 months of her own life as it falls apart in a desperate attempt to put it back together again in the only way she knows how. IT’S LONELY AT THE CENTRE OF THE EARTH is an intimate and metanarrative look into the life of a selfish artist who must create for her own survival."
+
+  book_info.appendChild(blurb_p)
 
   book_container.appendChild(book_div)
 }
@@ -190,7 +194,7 @@ async function fetchGoogleSheetData() {
     // 8 - Genre
     // 9 - Average (could just calculate?)
 
-    
+
 
     listOfBooks = []
     listOfRatings = []
@@ -227,15 +231,17 @@ async function fetchGoogleSheetData() {
       return b["date"] - a["date"];
     })
     // Get the current book
-    var currentBook = listOfBooks.shift();
+    var currentBook = listOfBooks[0];
 
-    createCurrentBook(currentBook);
+    //createCurrentBook(currentBook);
     addNextPickerData(currentBook);
 
     // Loop through the rows (starting from row 1 to skip headers)
     for (let i = 0; i < listOfBooks.length; i++) {
 
       const bookMap = listOfBooks[i];
+
+      const isCurrentBook = i == 0;
 
       const book_div = document.createElement("div");
 
@@ -244,10 +250,14 @@ async function fetchGoogleSheetData() {
       book_div.setAttribute("data-category", bookMap["picker"]);
 
 
-      const book_cover = document.createElement("div");
-      book_cover.setAttribute("class", "book-cover");
+      const date = document.createElement("div");
+      date.setAttribute("class", "timeline-date");
       const book_info = document.createElement("div");
-      book_info.setAttribute("class", "book-info");
+      book_info.setAttribute("class", "timeline");
+      const book_cover = document.createElement("div");
+      book_cover.setAttribute("class", "book-content");
+
+      book_div.appendChild(date);
       book_div.appendChild(book_info);
       book_div.appendChild(book_cover);
 
@@ -258,7 +268,7 @@ async function fetchGoogleSheetData() {
 
       var imgElement = document.createElement("img");
       const book_cover_url = img_url + url_title + "_" + url_author + ".jpg";
-      console.log(book_cover_url);
+      //console.log(book_cover_url);
       imgElement.setAttribute("src", book_cover_url);
 
       book_cover.appendChild(imgElement);
@@ -269,7 +279,31 @@ async function fetchGoogleSheetData() {
         if (key == "date") {
           const month = value.toLocaleString('default', { month: 'short' });
           const year = value.toLocaleString('default', { year: 'numeric' });
-          title_p.innerText = "Picked in " + month + " " + year
+          const text = month + " " + year
+          date.setAttribute("class", date.getAttribute("class") + " " + key);
+          date.innerHTML = text;
+          continue;
+        } if (key == "average") {
+          // add starburst
+          //     <div class="starburst rating">
+          // <b>?</b></div>
+          if (!isCurrentBook) {
+            const starburst_div = document.createElement("div");
+            starburst_div.setAttribute("class", "starburst average")
+            starburst_div.innerHTML = value;
+            book_cover.appendChild(starburst_div)
+          } else {
+            const currently_sash = document.createElement("div");
+            currently_sash.setAttribute("class", "currently-sash");
+            currently_sash.innerHTML = "Currently reading!";
+            book_cover.appendChild(currently_sash);
+            const av_div = document.createElement("div");
+            av_div.setAttribute("class", "average");
+            av_div.setAttribute("style", "display: none;");
+            av_div.innerHTML = "0";
+            book_cover.appendChild(av_div);
+          }
+          continue;
         } else if (key == "allRatings") {
           //skip
           continue;
@@ -279,17 +313,20 @@ async function fetchGoogleSheetData() {
         book_info.appendChild(title_p)
       }
 
-      for (const [key, value] of Object.entries(bookMap["allRatings"])) {
-        const title_p = document.createElement("p");
-        title_p.setAttribute("class", key);
-        if (value != "dnf") {
-          title_p.innerText = key + ": " + value;
-        } else {
-          title_p.innerText = key + ": " + ratingMap["dnf"];
+      if (isCurrentBook) {
+        // skip ratings
+      } else {
+        for (const [key, value] of Object.entries(bookMap["allRatings"])) {
+          const title_p = document.createElement("p");
+          title_p.setAttribute("class", key);
+          if (value != "dnf") {
+            title_p.innerText = key + ": " + value;
+          } else {
+            title_p.innerText = key + ": " + ratingMap["dnf"];
+          }
+          book_info.appendChild(title_p)
         }
-        book_info.appendChild(title_p)
       }
-
       book_container.appendChild(book_div)
     }
 
