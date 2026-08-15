@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/read_google_sheet_data.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/details.js') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 </head>
@@ -33,9 +34,9 @@
                 <span class="next-date">x</span>.
             </p>
             <!--make this reveal when you click a camera emoji-->
-            <details>
+            <details id="polaroid_detail">
                 <summary>Click me!</summary>
-                <div class="polaroid">
+                <div class="polaroid" onclick="closeDetails()">
                     <img class="img-square" src="static/images/berlin-2022.jpg">
                     Berlin, 2022
                 </div>
@@ -43,8 +44,8 @@
         </div>
     </header>
     <nav>
-        <h2>Previous books...</h2>
         <div class="buttons-container">
+            <h3>Show books picked by...</h3>
             <div id="filters" class="button-group">
                 <button class="button is-checked" data-filter="*">show all</button>
                 <button class="button" data-filter=".Helen">Helen</button>
@@ -52,16 +53,18 @@
                 <button class="button" data-filter=".Max, .alkaline-earth">Max</button>
             </div>
             <div id="sorts" class="button-group">
+                <h3>Sort by...</h3>
                 <button class="button is-checked" data-sort-by="original-order">original
                     order</button>
                 <button class="button" data-sort-by="title">Title (a-z)</button>
                 <button class="button" data-sort-by="author">Author (a-z)</button>
                 <button class="button" data-sort-by="year">Publication Year (old - new)</button>
                 <button class="button" data-sort-by="date">Date picked (new - old)</button>
-                <button class="button" data-sort-by="average">Average rating (high to low)</button>
-                <button class="button" data-sort-by="helen_rating">Helen's rating (high to low)</button>
-                <button class="button" data-sort-by="max_rating">Max's rating (high to low)</button>
-                <button class="button" data-sort-by="beth_rating">Beth's rating (high to low)</button>
+                <h3>Sort by ratings, high to low</h3>
+                <button class="button" data-sort-by="average">Average</button>
+                <button class="button" data-sort-by="helen_rating">Helen</button>
+                <button class="button" data-sort-by="max_rating">Max</button>
+                <button class="button" data-sort-by="beth_rating">Beth</button>
             </div>
         </div>
     </nav>
