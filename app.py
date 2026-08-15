@@ -13,6 +13,11 @@ def index():
     """Serve up the home page"""
     return render_template("book_club_index.html")
 
+@app.route("/riders")
+def riders_slideshow():
+    """Serve up the riders quotes page page"""
+    return render_template("riders_slideshow.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

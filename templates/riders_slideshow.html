@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Jilly Cooper is going to hell</title>
+    <!-- Main style sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/riders.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/slideshow.js') }}"></script>
+
+</head>
+
+<body>
+
+
+    <div id="wrapper">
+        <div class="header">
+            <img style="width:200px" src="./static/images/riders/prawn_cocktail.png">
+            <h1>The best of Riders</h1>
+            <!--h2>A Pen by <a href="http://www.andrecortellini.com" target="_blank">André Cortellini</a></h2-->
+            <img style="width:200px" src="./static/images/riders/horse_plushie.png">
+        </div>
+
+        <div id="slider-wrap">
+            <ul id="slider">
+                <li data-color="#1abc9c">
+                    <div>
+                        <img style="width:700px" src="./static/images/riders/RCB_1.jpg">
+                    </div>
+                </li>
+
+                <li data-color="#3498db">
+                    <div>
+
+                        <img style="width:700px" src="./static/images/riders/problematic_gypsy_reference.jpg">
+                        <blockquote>At least they're referencing Heathcliff's background unlike every adaptation
+                            ever.<cite>Max</cite></blockquote>
+                    </div>
+                </li>
+
+                <li data-color="#9b59b6">
+                    <div>
+                        <img style="width:500px" src="./static/images/riders/whatsapp_rcb_inspo.jpg">
+
+                    </div>
+                </li>
+
+                <li data-color="#34495e">
+                    <div>
+                        <img style="width:700px" src="./static/images/riders/tonsils_wealth_tax.jpeg">
+                        <blockquote>I think I had a hernia reading this line <cite>Max</cite></blockquote>
+                    </div>
+                </li>
+
+                <li data-color="#e74c3c">
+                    <div>
+                        <h3>Slide #5</h3>
+                        <span>Sub-title #5</span>
+                    </div>
+                </li>
+
+
+            </ul>
+
+            <!--controls-->
+            <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+            <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+            <div id="counter"></div>
+
+            <div id="pagination-wrap">
+                <ul>
+                </ul>
+            </div>
+            <!--controls-->
+
+        </div>
+
+    </div>
+</body>
