@@ -1,9 +1,9 @@
 //current position
 var pos = 0;
 //number of slides
-var totalSlides = $('#slider-wrap ul li').length;
+var totalSlides;
 //get the slide width
-var sliderWidth = $('#slider-wrap').width();
+var sliderWidth;
 
 
 $(document).ready(function(){
