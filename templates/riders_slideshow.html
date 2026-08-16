@@ -15,24 +15,24 @@
 
     <div id="wrapper">
         <div class="header">
-            <img style="width:200px" src="./static/images/riders/prawn_cocktail.png">
+            <img style="width:200px" src="{{ url_for('static', filename='/images/riders/prawn_cocktail.png') }}">
             <h1>The best of Riders</h1>
             <!--h2>A Pen by <a href="http://www.andrecortellini.com" target="_blank">André Cortellini</a></h2-->
-            <img style="width:200px" src="./static/images/riders/horse_plushie.png">
+            <img style="width:200px" src="{{ url_for('static', filename='images/riders/horse_plushie.png') }}">
         </div>
 
         <div id="slider-wrap">
             <ul id="slider">
                 <li data-color="#1abc9c">
                     <div>
-                        <img style="width:700px" src="./static/images/riders/RCB_1.jpg">
+                        <img style="width:700px" src="{{ url_for('static', filename='images/riders/RCB_1.jpg') }}">
                     </div>
                 </li>
 
                 <li data-color="#3498db">
                     <div>
 
-                        <img style="width:700px" src="./static/images/riders/problematic_gypsy_reference.jpg">
+                        <img style="width:700px" src="{{ url_for('static', filename='images/riders/problematic_gypsy_reference.jpg') }}">
                         <blockquote>At least they're referencing Heathcliff's background unlike every adaptation
                             ever.<cite>Max</cite></blockquote>
                     </div>
@@ -40,14 +40,14 @@
 
                 <li data-color="#9b59b6">
                     <div>
-                        <img style="width:500px" src="./static/images/riders/whatsapp_rcb_inspo.jpg">
+                        <img style="width:500px" src="{{ url_for('static', filename='images/riders/whatsapp_rcb_inspo.jpg') }}">
 
                     </div>
                 </li>
 
                 <li data-color="#34495e">
                     <div>
-                        <img style="width:700px" src="./static/images/riders/tonsils_wealth_tax.jpeg">
+                        <img style="width:700px" src="{{ url_for('static', filename='images/riders/tonsils_wealth_tax.jpeg') }}">
                         <blockquote>I think I had a hernia reading this line <cite>Max</cite></blockquote>
                     </div>
                 </li>
