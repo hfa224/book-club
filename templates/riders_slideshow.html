@@ -9,9 +9,7 @@
     <script src="{{ url_for('static', filename='scripts/slideshow.js') }}"></script>
     
 <!-- everything default and using `weight: 100` -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back,arrow_forward" /></head>
 
 <body>
 
@@ -19,7 +17,7 @@
     <div id="wrapper">
         <div class="header">
             <img style="width:150px" src="{{ url_for('static', filename='/images/riders/prawn_cocktail.png') }}">
-            <h1>The best of Riders</h1>
+            <h1>The "best" of Riders</h1>
             <!--h2>A Pen by <a href="http://www.andrecortellini.com" target="_blank">André Cortellini</a></h2-->
             <img style="width:150px" src="{{ url_for('static', filename='images/riders/horse_plushie.png') }}">
         </div>
@@ -156,8 +154,12 @@
 
 
             <!--controls-->
-            <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-            <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+            <div class="btns" id="next"><span class="material-symbols-outlined">
+arrow_forward
+</span></div>
+            <div class="btns" id="previous"><span class="material-symbols-outlined">
+arrow_back
+</span></div>
             <div id="counter"></div>
 
             <div id="pagination-wrap">
