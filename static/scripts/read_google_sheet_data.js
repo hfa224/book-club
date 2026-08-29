@@ -149,7 +149,7 @@ function addNextPickerData(currentBook) {
   const pickerList = ["Beth", "Helen", "Max"];
 
   let currentPicker = currentBook["picker"];
-  let currentDate = currentBook["date"];
+  let currentDate = new Date(currentBook["date"].getTime());
   var nextDate = new Date(currentDate.setMonth(currentDate.getMonth() + 1));
 
   let nextPickerIndex = (pickerList.indexOf(currentPicker) + 1) % 3;
@@ -201,7 +201,7 @@ async function fetchGoogleSheetData() {
 
 
     const no_books_span = document.querySelector(".number-books");
-    no_books_span.innerText = " " + rows.length - 2
+    no_books_span.innerText = " " + rows.length - 1
 
     for (let i = 1; i < rows.length; i++) {
       const row = rows[i];
@@ -268,7 +268,7 @@ async function fetchGoogleSheetData() {
 
       var imgElement = document.createElement("img");
       const book_cover_url = img_url + url_title + "_" + url_author + ".jpg";
-      //console.log(book_cover_url);
+
       imgElement.setAttribute("src", book_cover_url);
 
       book_cover.appendChild(imgElement);
