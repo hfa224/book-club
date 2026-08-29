@@ -240,6 +240,10 @@ a:active {}
     margin-top: 1em;
   }
 
+  .book-content {
+    position: relative;
+    height: 350px;
+  }
 
   .book-content img {
     width: 150px;
