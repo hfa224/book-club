@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Jilly Cooper is going to hell</title>
+    <!-- Main style sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/riders.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/slideshow.js') }}"></script>
+    
+<!-- everything default and using `weight: 100` -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back,arrow_forward" /></head>
+
+<body>
+
+
+    <div id="wrapper">
+        <div class="header">
+            <img style="width:150px" src="{{ url_for('static', filename='/images/riders/prawn_cocktail.png') }}">
+            <h1>The "best" of Riders</h1>
+            <!--h2>A Pen by <a href="http://www.andrecortellini.com" target="_blank">André Cortellini</a></h2-->
+            <img style="width:150px" src="{{ url_for('static', filename='images/riders/horse_plushie.png') }}">
+        </div>
+
+        <div id="slider-wrap"
+            style="background-image: url({{ url_for('static', filename='images/riders/picture_frame_3.png') }});">
+            <ul id="slider">
+                <li data-color="#1abc9c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/RCB_1.jpg') }}">
+                    </div>
+                </li>
+
+                <li data-color="#3498db">
+                    <div>
+
+                        <img src="{{ url_for('static', filename='images/riders/problematic_gypsy_reference.jpg') }}">
+                        <blockquote>At least they're referencing Heathcliff's background unlike every adaptation
+                            ever.<cite>Max</cite></blockquote>
+                    </div>
+                </li>
+
+                <li data-color="#9b59b6">
+                    <div>
+                        <img style="height:400px"
+                            src="{{ url_for('static', filename='images/riders/whatsapp_rcb_inspo.jpg') }}">
+
+                    </div>
+                </li>
+
+                <li data-color="#34495e">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/tonsils_wealth_tax.jpeg') }}">
+                        <blockquote>I think I had a hernia reading this line <cite>Max</cite></blockquote>
+                    </div>
+                </li>
+
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/daddy_issues.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/dockrs_and_car_workers.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/eleven_stone_bulk.jpg') }}">
+                        <blockquote>Omg die!!!! Die again!!! <cite>Bethany</cite></blockquote>
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/fuck_the_plebs.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/hitler.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/my_only_love.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/nonce_2.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img style="height:200px" src="{{ url_for('static', filename='images/riders/poor_tory.jpeg') }}">
+                        <img style="height:200px" src="{{ url_for('static', filename='images/riders/kafka.jpeg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/love.jpeg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/proud_to_be_british.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/sos_he.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/suggestion_of_anorexia.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/tory_candidate.jpg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/wanking_schoolboy.jpg') }}">
+                    </div>
+                </li>
+                
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/italian_pepper_grinder.jpeg') }}">
+                    </div>
+                </li>
+                
+                <li data-color="#e74c3c">
+                    <div>
+                        <img style="height:400px" src="{{ url_for('static', filename='images/riders/laughed_fatly.jpeg') }}">
+                    </div>
+                </li>
+                
+                <li data-color="#e74c3c">
+                    <div>
+                        <img style="height:400px" src="{{ url_for('static', filename='images/riders/self_insert.jpeg') }}">
+                    </div>
+                </li>
+                <li data-color="#e74c3c">
+                    <div>
+                        <img src="{{ url_for('static', filename='images/riders/helen_nightmare.jpeg') }}">
+                    </div>
+                </li>
+            </ul>
+
+
+            <!--controls-->
+            <div class="btns" id="next"><span class="material-symbols-outlined">
+arrow_forward
+</span></div>
+            <div class="btns" id="previous"><span class="material-symbols-outlined">
+arrow_back
+</span></div>
+            <div id="counter"></div>
+
+            <div id="pagination-wrap">
+                <ul>
+                </ul>
+            </div>
+            <!--controls-->
+
+        </div>
+
+    </div>
+</body>
